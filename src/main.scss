@@ -1,3 +1,27 @@
+@mixin aven_font($name, $styles, $widths...) {
+    @each $style in $styles {
+        @each $width in $widths {
+            @font-face {
+                font-family: $name;
+                font-style:  $style;
+                font-weight: $width;
+                src:         url("https://toxicaven.dev/assets/" + $name + "-" + $width + "-" + $style + ".woff2") format("woff2");
+            }
+        }
+    }
+}
+
+@include aven_font("Whitney",          [normal italic], 300, 400, 500, 600, 700);
+@include aven_font("ABC Ginto Normal", [normal italic],      400, 500,      700);
+
+// anyone who likes either discord font should be taken out back and shot
+// ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
+// so well have to settle for this one
+:root {
+    --font-primary: Whitney,            "Open Sans", sans-serif !important;
+    --font-display: "ABC Ginto Normal", "Open Sans", sans-serif !important;
+}
+
 // slate buttons
 [class^=channelTextArea-] [class^=buttons-] {
     // remove nitro and sticker buttons
@@ -6,7 +30,7 @@
     }
 }
 
-// nobody cares
+// nobody cares 
 [id^=popout_] [class*=upsellTooltipWrapper-] {
     display: none;
 } 
@@ -22,7 +46,7 @@
     left:  unset;
     right: 6px;
 
-    // make the star black and white :3s
+    // make the star black and white :3
     svg {
         filter: invert(100%) grayscale(100%) brightness(500%);
     }
