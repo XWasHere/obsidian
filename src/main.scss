@@ -17,3 +17,13 @@
 // woo crisis line advert let me cut myself in peace
 [class*=snowsgivingLink-] { display: none; }
 
+// fuck you im used to left
+[class^=imageAccessory-] {
+    left:  unset;
+    right: 6px;
+
+    // make the star black and white :3s
+    svg {
+        filter: invert(100%) grayscale(100%) brightness(500%);
+    }
+}
