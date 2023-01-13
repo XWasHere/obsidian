@@ -14,12 +14,55 @@
 @include aven_font("Whitney",          normal italic, 300 400 500 600 700);
 @include aven_font("ABC Ginto Normal", normal italic,     400 500     700);
 
-// anyone who likes either discord font should be taken out back and shot
-// ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
-// so well have to settle for this one
 :root {
+    // anyone who likes either discord font should be taken out back and shot
+    // ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
+    // so well have to settle for this one
+    
     --font-primary: Whitney,            "Open Sans", sans-serif !important;
     --font-display: "ABC Ginto Normal", "Open Sans", sans-serif !important;
+
+    // add some niceeee colors :3
+    --background-primary:             #0f0f0f;
+    --background-secondary:           #080808;
+    --background-secondary-alt:       #090909;
+    --background-tertiary:            #000000;
+    --background-accent:              #0f0f0f;
+    --background-floating:            #090909;
+    --channeltextarea-background:     #181818;
+    --scrollbar-thin-thumb:           #202020;
+    --scrollbar-auto-thumb:           #202020;
+    --scrollbar-auto-track:           transparent;
+    --profile-role-pill-border-color: #202020;
+}
+
+// fix colors on the member list
+div[class^=peopleColumn-] {
+    background-color: var(--background-primary);
+}
+
+// fix colors on command/mention autocomplete (damn it discord)
+div[class*=channelTextArea-]>div[class*=autocomplete-] {
+    background-color: var(--background-secondary);
+    
+    div[class*=selected-] {
+        background-color: var(--background-tertiary);
+    }
+}
+
+// make nitro tab in settings less flashy
+div[aria-controls=discord-nitro-tab] > div[class*="premiumLabel-"] {
+    color: #DEADDD00;
+
+    ::before {
+        color: var(--interactive-normal);
+        content: "10$ for a gif in my pfp???";
+    }
+}
+
+// fix role border
+[class^=rolePill-] {
+    border: 1px solid;
 }
 
 // slate buttons
@@ -33,7 +76,7 @@
 // nobody cares 
 [id^=popout_] [class*=upsellTooltipWrapper-] {
     display: none;
-} 
+}
 
 // remove nitro tab in dm list
 .content-2a4AW9>li:nth-of-type(2) { display:none; }

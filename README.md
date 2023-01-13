@@ -1,6 +1,6 @@
 # sane discord theme
 
-heres a nice little theme that wont kill your eyes. niceee dark colors (still being ported from v1, gimme a week)
+heres a nice little theme that wont kill your eyes. niceee dark colors
 
 ## changes
 - use the old discord font, hosted by toxicaven (thanks, but fix your css :P)
