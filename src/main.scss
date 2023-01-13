@@ -1,4 +1,4 @@
-@mixin aven_font($name, $styles, $widths...) {
+@mixin aven_font($name, $styles, $widths) {
     @each $style in $styles {
         @each $width in $widths {
             @font-face {
@@ -11,8 +11,8 @@
     }
 }
 
-@include aven_font("Whitney",          [normal italic], 300, 400, 500, 600, 700);
-@include aven_font("ABC Ginto Normal", [normal italic],      400, 500,      700);
+@include aven_font("Whitney",          normal italic, 300 400 500 600 700);
+@include aven_font("ABC Ginto Normal", normal italic,     400 500     700);
 
 // anyone who likes either discord font should be taken out back and shot
 // ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
@@ -38,10 +38,10 @@
 // remove nitro tab in dm list
 .content-2a4AW9>li:nth-of-type(2) { display:none; }
 
-// woo crisis line advert let me cut myself in peace
+// remove crisis line advert
 [class*=snowsgivingLink-] { display: none; }
 
-// fuck you im used to left
+// move star back where it belongs
 [class^=imageAccessory-] {
     left:  unset;
     right: 6px;
