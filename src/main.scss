@@ -1,3 +1,5 @@
+@import "images.scss";
+
 @mixin aven_font($name, $styles, $widths) {
     @each $style in $styles {
         @each $width in $widths {
@@ -42,11 +44,15 @@
 }
 
 // fix colors on command/mention autocomplete (damn it discord)
-[class*=channelTextArea-]> [class*=autocomplete-] {
+[class*=channelTextArea-]>[class*=autocomplete-] {
     background-color: var(--background-secondary);
-    
-    div[class*=selected-] {
-        background-color: var(--background-tertiary);
+
+    [class*=categoryHeader] {
+        background-color: var(--background-secondary);
+    }
+
+    [class*=autocompleteRow-][aria-selected=true]>[class^=base-] {
+        background-color: var(--background-tertiary) !important;
     }
 }
 
@@ -93,4 +99,21 @@
     svg {
         filter: invert(100%) grayscale(100%) brightness(500%);
     }
+}
+
+// make user profile toast a solid color (stupid discord...)
+[class^=userPopoutInner-] {
+    --profile-avatar-border-color: var(--profile-body-background-color);
+    
+    background: var(--profile-body-background-color);
+}
+
+[class^=overlayBackground-] {
+    margin: 21px 0px 0px;
+}
+
+[data-type=emoji][data-name=\:flag_gb\:] {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url($betterbong) no-repeat;
 }
