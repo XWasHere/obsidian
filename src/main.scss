@@ -37,12 +37,12 @@
 }
 
 // fix colors on the member list
-div[class^=peopleColumn-] {
+[class^=peopleColumn-] {
     background-color: var(--background-primary);
 }
 
 // fix colors on command/mention autocomplete (damn it discord)
-div[class*=channelTextArea-]>div[class*=autocomplete-] {
+[class*=channelTextArea-]> [class*=autocomplete-] {
     background-color: var(--background-secondary);
     
     div[class*=selected-] {
@@ -51,11 +51,11 @@ div[class*=channelTextArea-]>div[class*=autocomplete-] {
 }
 
 // make nitro tab in settings less flashy
-div[aria-controls=discord-nitro-tab] > div[class*="premiumLabel-"] {
+[aria-label=Nitro] > [class*=premiumLabel-] {
     color: #DEADDD00;
 
-    ::before {
-        color: var(--interactive-normal);
+    &:before {
+        color:    var(--interactive-normal);
         content: "10$ for a gif in my pfp???";
     }
 }
