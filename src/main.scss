@@ -1,0 +1,19 @@
+// slate buttons
+[class^=channelTextArea-] [class^=buttons-] {
+    // remove nitro and sticker buttons
+    >:nth-child(1), >:nth-child(3) {
+        display: none;
+    }
+}
+
+// nobody cares
+[id^=popout_] [class*=upsellTooltipWrapper-] {
+    display: none;
+} 
+
+// remove nitro tab in dm list
+.content-2a4AW9>li:nth-of-type(2) { display:none; }
+
+// woo crisis line advert let me cut myself in peace
+[class*=snowsgivingLink-] { display: none; }
+

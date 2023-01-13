@@ -1,18 +1,18 @@
 {
-  "id": "dev.replugged.ThemeTemplate",
-  "name": "Theme Template",
-  "description": "A theme template",
+  "id": "ls.xuti.sanediscord",
+  "name": "sane discord",
+  "description": "sane discord thing",
   "author": {
-    "name": "replugged",
-    "discordID": "1000992611840049192",
-    "github": "replugged-org"
+    "name": "xwashere",
+    "discordID": "627555163212873728",
+    "github": "xwashere"
   },
-  "version": "1.0.2",
+  "version": "1.0.0",
   "updater": {
     "type": "github",
-    "id": "replugged-org/theme-template"
+    "id": "xwashere/sane-discord"
   },
   "license": "MIT",
   "type": "replugged-theme",
-  "main": "src/main.css"
+  "main": "src/main.scss"
 }
