@@ -96,7 +96,7 @@
     right: 6px;
 
     // make the star black and white :3
-    svg {
+    [class*=selected-] svg, svg:hover {
         filter: invert(100%) grayscale(100%) brightness(500%);
     }
 }
