@@ -141,8 +141,10 @@ $libonly: false !default;
     }
 
     // remove help button. you know you wont ever use it
-    [class^=toolbar-] a[href=https\:\/\/support\.discord\.com] {
-        display: none;
+    [class^=toolbar-] {
+        a[href=https\:\/\/support\.discord\.com], [aria-label=Notification\ Settings] {
+            display: none;
+        }
     }
 
     // collapsible search bar
