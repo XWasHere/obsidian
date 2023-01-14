@@ -1,5 +1,8 @@
 @import "images.scss";
 
+// sets this to not include any css and only gives you the functions/mixins
+$libonly: false !default;
+
 @mixin aven_font($name, $styles, $widths) {
     @each $style in $styles {
         @each $width in $widths {
@@ -13,121 +16,132 @@
     }
 }
 
-@include aven_font("Whitney",          normal italic, 300 400 500 600 700);
-@include aven_font("ABC Ginto Normal", normal italic,     400 500     700);
-
-:root, .default-colors {
-    // anyone who likes either discord font should be taken out back and shot
-    // ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
-    // so well have to settle for this one
-    
-    --font-primary: Whitney,            "Open Sans", sans-serif !important;
-    --font-display: "ABC Ginto Normal", "Open Sans", sans-serif !important;
-
-    // add some niceeee colors :3
-    --primary-dark-500: #1f1f1f;
-    --primary-dark-500-rgb: 31,31,31;
-    --primary-dark-560: #181818;
-    --primary-dark-600: #121212;
-    --primary-dark-630: #0f0f0f;
-    --primary-dark-660: #0b0b0b;
-    --primary-dark-700: #080808;
-
-    // this shit is annoying
-    --profile-body-background-color: var(--background-secondary-alt);
-
-    // scrollbar gets special treatment
-    --scrollbar-thin-thumb: #202020;
-    --scrollbar-auto-thumb: #202020;
-    --scrollbar-auto-track:   transparent;
+@mixin discord_color($name, $color) {
+    --#{$name}:     #{$color};
+    --#{$name}-rgb: #{red($color)}, #{blue($color)}, #{green($color)};
 }
 
-// fix colors on the member list
-[class^=peopleColumn-] {
-    background-color: var(--background-primary);
-}
+@if $libonly == false {
+    @include aven_font("Whitney",          normal italic, 300 400 500 600 700);
+    @include aven_font("ABC Ginto Normal", normal italic,     400 500     700);
 
-// fix colors on command/mention autocomplete (damn it discord)
-[class*=channelTextArea-]>[class*=autocomplete-] {
-    background-color: var(--background-secondary);
+    :root, .default-colors {
+        // anyone who likes either discord font should be taken out back and shot
+        // ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
+        // so well have to settle for this one
+        
+        --font-primary: Whitney,            "Open Sans", sans-serif !important;
+        --font-display: "ABC Ginto Normal", "Open Sans", sans-serif !important;
 
-    [class*=categoryHeader] {
+        // add some niceeee colors :3
+        @include discord_color(primary-dark-500, #1f1f1f);
+        @include discord_color(primary-dark-560, #181818);
+        @include discord_color(primary-dark-600, #121212);
+        @include discord_color(primary-dark-630, #0f0f0f);
+        @include discord_color(primary-dark-660, #0b0b0b);
+        @include discord_color(primary-dark-700, #080808);
+
+        // this shit is annoying
+        --profile-body-background-color: var(--background-secondary-alt);
+
+        // scrollbar gets special treatment
+        --scrollbar-thin-thumb: #202020;
+        --scrollbar-auto-thumb: #202020;
+        --scrollbar-auto-track:   transparent;
+    }
+
+    // fix colors on the member list
+    [class^=peopleColumn-] {
+        background-color: var(--background-primary);
+    }
+
+    // fix colors on command/mention autocomplete (damn it discord)
+    [class*=channelTextArea-]>[class*=autocomplete-] {
         background-color: var(--background-secondary);
+
+        [class*=categoryHeader] {
+            background-color: var(--background-secondary);
+        }
+
+        [class*=autocompleteRow-][aria-selected=true]>[class^=base-] {
+            background-color: var(--background-tertiary) !important;
+        }
     }
 
-    [class*=autocompleteRow-][aria-selected=true]>[class^=base-] {
-        background-color: var(--background-tertiary) !important;
+    // make nitro tab in settings less flashy
+    [aria-label=Nitro] > [class*=premiumLabel-] {
+        color: #DEADDD00;
+
+        &:before {
+            color:    var(--interactive-normal);
+            content: "10$ for a gif in my pfp???";
+        }
     }
-}
 
-// make nitro tab in settings less flashy
-[aria-label=Nitro] > [class*=premiumLabel-] {
-    color: #DEADDD00;
-
-    &:before {
-        color:    var(--interactive-normal);
-        content: "10$ for a gif in my pfp???";
+    // fix role border
+    [class^=rolePill-] {
+        border: 1px solid;
     }
-}
 
-// fix role border
-[class^=rolePill-] {
-    border: 1px solid;
-}
+    // slate buttons
+    [class^=channelTextArea-] [class^=buttons-] {
+        // remove nitro and sticker buttons
+        >:nth-child(1), >:nth-child(3) {
+            display: none;
+        }
+    }
 
-// slate buttons
-[class^=channelTextArea-] [class^=buttons-] {
-    // remove nitro and sticker buttons
-    >:nth-child(1), >:nth-child(3) {
+    // nobody cares 
+    [id^=popout_] [class*=upsellTooltipWrapper-] {
         display: none;
     }
-}
 
-// nobody cares 
-[id^=popout_] [class*=upsellTooltipWrapper-] {
-    display: none;
-}
+    // remove nitro tab in dm list
+    .content-2a4AW9>li:nth-of-type(2) { display:none; }
 
-// remove nitro tab in dm list
-.content-2a4AW9>li:nth-of-type(2) { display:none; }
+    // remove crisis line advert
+    [class*=snowsgivingLink-] { display: none; }
 
-// remove crisis line advert
-[class*=snowsgivingLink-] { display: none; }
+    // move star back where it belongs
+    [class^=imageAccessory-] {
+        left:  unset;
+        right: 6px;
 
-// move star back where it belongs
-[class^=imageAccessory-] {
-    left:  unset;
-    right: 6px;
-
-    // make the star black and white :3
-    [class*=selected-] svg, svg:hover {
-        filter: invert(100%) grayscale(100%) brightness(500%);
+        // make the star black and white :3
+        [class*=selected-] svg, svg:hover {
+            filter: invert(100%) grayscale(100%) brightness(500%);
+        }
     }
-}
 
-// make user profile toast a solid color (stupid discord...)
-[class^=userPopoutInner-] {
-    --profile-avatar-border-color: var(--profile-body-background-color);
-    
-    background: var(--profile-body-background-color);
-}
+    // make user profile toast a solid color (stupid discord...)
+    [class^=userPopoutInner-] {
+        --profile-avatar-border-color: var(--profile-body-background-color);
+        
+        background: var(--profile-body-background-color);
+    }
 
-[class^=overlayBackground-] {
-    margin: 21px 0px 0px;
-}
+    [class^=overlayBackground-] {
+        margin: 21px 0px 0px;
+    }
 
-// transgender british flag
-[data-type=emoji][data-name=\:flag_gb\:] {
-    -moz-box-sizing: border-box;
-    box-sizing:      border-box;
-    background:      url($betterbong) no-repeat;
-    width:           1.375em;
-    height:          1.375em;
-    padding-left:    1.375em;
-}
+    // transgender british flag
+    [data-type=emoji][data-name=\:flag_gb\:] {
+        -moz-box-sizing: border-box;
+        box-sizing:      border-box;
+        background:      url($betterbong) no-repeat;
+        width:           1.375em;
+        height:          1.375em;
+        padding-left:    1.375em;
+    }
 
-[data-type=emoji][data-name=\:flag_gb\:].jumboable {
-    width:        3rem;
-    height:       3rem;
-    padding-left: 3rem;
+    [data-type=emoji][data-name=\:flag_gb\:].jumboable {
+        width:        3rem;
+        height:       3rem;
+        padding-left: 3rem;
+    }
+
+    // remove help button. you know you wont ever use it
+    [class^=toolbar-] a[href=https\:\/\/support\.discord\.com] {
+        display: none;
+    }
 }
