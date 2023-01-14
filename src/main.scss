@@ -25,17 +25,18 @@
     --font-display: "ABC Ginto Normal", "Open Sans", sans-serif !important;
 
     // add some niceeee colors :3
-    --background-primary:             #0f0f0f;
-    --background-secondary:           #080808;
-    --background-secondary-alt:       #090909;
-    --background-tertiary:            #000000;
-    --background-accent:              #0f0f0f;
-    --background-floating:            #090909;
-    --channeltextarea-background:     #181818;
-    --scrollbar-thin-thumb:           #202020;
-    --scrollbar-auto-thumb:           #202020;
-    --scrollbar-auto-track:           transparent;
-    --profile-role-pill-border-color: #202020;
+    --primary-dark-500: #1f1f1f;
+    --primary-dark-500-rgb: 31,31,31;
+    --primary-dark-560: #181818;
+    --primary-dark-600: #121212;
+    --primary-dark-630: #0f0f0f;
+    --primary-dark-660: #0b0b0b;
+    --primary-dark-700: #080808;
+
+    // scrollbar gets special treatment
+    --scrollbar-thin-thumb: #202020;
+    --scrollbar-auto-thumb: #202020;
+    --scrollbar-auto-track:   transparent;
 }
 
 // fix colors on the member list
