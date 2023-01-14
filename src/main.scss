@@ -144,4 +144,31 @@ $libonly: false !default;
     [class^=toolbar-] a[href=https\:\/\/support\.discord\.com] {
         display: none;
     }
+
+    // collapsible search bar
+    [class^=search-]:not([class*=open-])>[class^=searchBar-] {
+        width:      24px;
+        background: transparent;
+
+        >[class^=icon-] {
+            // da hand
+            cursor: pointer;
+
+            // do some horrible stretching thing to make it look like a normal icon
+            svg {
+                width:  24px;
+                height: 24px;
+
+                margin-left: -3px;
+                margin-top:  -3px;
+
+                color: var(--interactive-normal);
+            }
+
+            // change color like a normal icon
+            &:hover svg {
+                color: var(--interactive-hover);
+            }
+        }
+    }
 }
