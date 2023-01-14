@@ -125,19 +125,36 @@ $libonly: false !default;
     }
 
     // transgender british flag
-    [data-type=emoji][data-name=\:flag_gb\:] {
+    [class^=inspector-] img[alt=\:flag_gb\:], [data-type=emoji]:is([data-name=\:flag_gb\:],[data-name=flag_gb]) {
         -moz-box-sizing: border-box;
         box-sizing:      border-box;
         background:      url($betterbong) no-repeat;
+
         width:           1.375em;
         height:          1.375em;
         padding-left:    1.375em;
-    }
 
-    [data-type=emoji][data-name=\:flag_gb\:].jumboable {
-        width:        3rem;
-        height:       3rem;
-        padding-left: 3rem;
+        &:is(img) {
+            width:        28px;
+            height:       28px;
+            padding-left: 28px;
+        }
+
+        &.jumboable {
+            width:        3rem;
+            height:       3rem;
+            padding-left: 3rem;
+        }
+
+        &[class*=emojiItemMedium-] {
+            width:  40px;
+            height: 40px;
+            margin: 4px;
+        }
+
+        div[class^=emojiSpriteImage] {
+            display: none;
+        }
     }
 
     // remove help button. you know you wont ever use it
