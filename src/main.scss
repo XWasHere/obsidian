@@ -16,7 +16,7 @@
 @include aven_font("Whitney",          normal italic, 300 400 500 600 700);
 @include aven_font("ABC Ginto Normal", normal italic,     400 500     700);
 
-:root {
+:root, .default-colors {
     // anyone who likes either discord font should be taken out back and shot
     // ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
     // so well have to settle for this one
@@ -32,6 +32,9 @@
     --primary-dark-630: #0f0f0f;
     --primary-dark-660: #0b0b0b;
     --primary-dark-700: #080808;
+
+    // this shit is annoying
+    --profile-body-background-color: var(--background-secondary-alt);
 
     // scrollbar gets special treatment
     --scrollbar-thin-thumb: #202020;
