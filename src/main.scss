@@ -1,46 +1,5 @@
 @use "images.scss";
-@use "mdi.scss"    as mdi;
-
-//#region config
-// sets this to not include any css and only gives you the functions/mixins
-$libonly:      false !default;
-
-// makes mentions less intrusive
-$fix-mentions: true !default;
-
-// use old font
-$fix-fonts:    true !default;
-
-// dark colors
-$fix-colors:   true !default;
-
-// remove nitro shit
-$nitro-cleanup:true !default;
-
-// clean up message bar
-$slate-cleanup:true !default;
-
-// remove popouts
-$remove-popouts:true !default;
-
-// clean up junjk in dm list
-$dm-list-cleanup:true !default;
-
-// move star to the right
-$fix-star:     true !default;
-
-// solid profile
-$solid-profile: true !default;
-
-// transgender british flag
-$jkr-is-a-trans-icon: true !default;
-
-// remove help icon
-$remove-help: true !default;
-
-// collapsible search bar
-$better-search-bar: true !default;
-//#endregion
+@use "mdi.scss"     as mdi;
 
 @mixin aven_font($name, $styles, $widths) {
     @each $style in $styles {
@@ -60,299 +19,242 @@ $better-search-bar: true !default;
     --#{$name}-rgb: #{red($color)}, #{blue($color)}, #{green($color)};
 }
 
-@if $libonly == false {
-    @if $fix-fonts {
-        @include aven_font("Whitney",          normal italic, 300 400 500 600 700);
-        @include aven_font("ABC Ginto Normal", normal italic,     400 500     700);
+@include aven_font("Whitney",          normal italic, 300 400 500 600 700);
+@include aven_font("ABC Ginto Normal", normal italic,     400 500     700);
+
+:root, .default-colors {
+    // fix fonts
+    --font-primary: Whitney,            sans-serif !important;
+    --font-display: "ABC Ginto Normal", sans-serif !important;
+
+    // add darker colors
+    @include discord_color(primary-dark-500, #1f1f1f);
+    @include discord_color(primary-dark-560, #181818);
+    @include discord_color(primary-dark-600, #121212);
+    @include discord_color(primary-dark-630, #0f0f0f);
+    @include discord_color(primary-dark-660, #0b0b0b);
+    @include discord_color(primary-dark-700, #080808);
+
+    // this shit is annoying
+    --profile-body-background-color: var(--background-secondary-alt);
+
+    // scrollbar gets special treatment
+    --scrollbar-thin-thumb: #202020;
+    --scrollbar-auto-thumb: #202020;
+    --scrollbar-auto-track:   transparent;
+}
+
+[class^=imageAccessory-] {
+    // move star back where it belongss
+    left:  unset;
+    right: 6px;
+
+    // make the favorite gif button black and white
+    [class*=selected-] svg, svg:hover {
+        filter: invert(100%) grayscale(100%) brightness(500%);
     }
+}
 
-    :root, .default-colors {
-        // anyone who likes either discord font should be taken out back and shot
-        // ...however, it doesnt look that good with open sans after refreshing as of 2023-01-12
-        // so well have to settle for this one
-        @if $fix-fonts {
-            --font-primary: Whitney,            "Open Sans", sans-serif !important;
-            --font-display: "ABC Ginto Normal", "Open Sans", sans-serif !important;
-        }
+// make nitro tab in settings less flashy
+[aria-label=Nitro] > [class*=premiumLabel-] {
+    color: #DEADDD00;
 
-        // add some niceeee colors :3
-        @if $fix-colors {
-            @include discord_color(primary-dark-500, #1f1f1f);
-            @include discord_color(primary-dark-560, #181818);
-            @include discord_color(primary-dark-600, #121212);
-            @include discord_color(primary-dark-630, #0f0f0f);
-            @include discord_color(primary-dark-660, #0b0b0b);
-            @include discord_color(primary-dark-700, #080808);
+    &:before {
+        color:    var(--interactive-normal);
+        content: "10$ for a gif in my pfp???";
+    }
+}
 
-            // this shit is annoying
-            --profile-body-background-color: var(--background-secondary-alt);
+// remove command and thread attachment buttons :/
+#channel-attach-THREAD, #channel-attach-SLASH_COMMAND {
+    display: none;
+}
+
+// slate buttons
+[class^=channelTextArea-] [class^=buttons-] {
+    // remove nitro and sticker buttons
+    >:nth-child(1), >:nth-child(3) {
+        display: none;
+    }
+}
+
+// nobody cares 
+[id^=popout_] [class*=upsellTooltipWrapper-] {
+    display: none;
+}
+
+// remove nitro tab in dm list
+.content-2a4AW9>li:nth-of-type(2) { display:none; }
+
+// remove crisis line advert
+[class*=snowsgivingLink-] { display: none; }
+
+// make user profile toast a solid color (stupid discord...)
+[class^=userPopoutInner-] {
+    --profile-avatar-border-color: var(--profile-body-background-color);
     
-            // scrollbar gets special treatment
-            --scrollbar-thin-thumb: #202020;
-            --scrollbar-auto-thumb: #202020;
-            --scrollbar-auto-track:   transparent;
-        }
+    background: var(--profile-body-background-color);
+}
+
+[class^=overlayBackground-] {
+    margin: 21px 0px 0px;
+}
+
+// transgender british flag
+[class^=inspector-] img[alt=\:flag_gb\:], [data-type=emoji]:is([data-name=\:flag_gb\:],[data-name=flag_gb]) {
+    -moz-box-sizing: border-box;
+    box-sizing:      border-box;
+    background:      url(images.$betterbong) no-repeat;
+
+    width:           1.375em;
+    height:          1.375em;
+    padding-left:    1.375em;
+
+    &:is(img) {
+        width:        22px;
+        height:       22px;
+        padding-left: 22px;
     }
 
-    @if $fix-colors {
-        // fix colors on the member list
-        [class^=peopleColumn-] {
-            background-color: var(--background-primary);
-        }
-
-        // fix colors on command/mention autocomplete (damn it discord)
-        [class*=channelTextArea-]>[class*=autocomplete-] {
-            background-color: var(--background-secondary);
-
-            [class*=categoryHeader] {
-                background-color: var(--background-secondary);
-            }
-
-            [class*=autocompleteRow-][aria-selected=true]>[class^=base-] {
-                background-color: var(--background-tertiary) !important;
-            }
-        }
+    &.jumboable {
+        width:        3rem;
+        height:       3rem;
+        padding-left: 3rem;
     }
 
-    // make nitro tab in settings less flashy
-    @if $nitro-cleanup {
-        [aria-label=Nitro] > [class*=premiumLabel-] {
-            color: #DEADDD00;
-
-            &:before {
-                color:    var(--interactive-normal);
-                content: "10$ for a gif in my pfp???";
-            }
-        }
+    &[class*=emojiItemMedium-] {
+        width:  40px;
+        height: 40px;
+        margin: 4px;
     }
 
-    // fix role border
-    [class^=rolePill-] {
-        border: 1px solid;
+    div[class^=emojiSpriteImage] {
+        display: none;
     }
+}
 
-    @if $slate-cleanup {
-        // remove command and thread attachment buttons :/
-        #channel-attach-THREAD, #channel-attach-SLASH_COMMAND {
-            display: none;
+// remove help button. you know you wont ever use it
+[class^=toolbar-] {
+    a[href=https\:\/\/support\.discord\.com], [aria-label=Notification\ Settings] {
+        display: none;
+    }
+}
+
+// collapsible search bar
+[class^=search-]:not([class*=open-])>[class^=searchBar-] {
+    width:      24px;
+    background: transparent;
+
+    >[class^=icon-] {
+        // da hand
+        cursor: pointer;
+
+        // do some horrible stretching thing to make it look like a normal icon
+        svg {
+            width:  24px;
+            height: 24px;
+
+            margin-left: -3px;
+            margin-top:  -3px;
+
+            color: var(--interactive-normal);
         }
 
-        // slate buttons
-        [class^=channelTextArea-] [class^=buttons-] {
-            // remove nitro and sticker buttons
-            >:nth-child(1), >:nth-child(3) {
-                display: none;
-            }
+        // change color like a normal icon
+        &:hover svg {
+            color: var(--interactive-hover);
         }
     }
+}
 
-    @if $remove-popouts {
-        // nobody cares 
-        [id^=popout_] [class*=upsellTooltipWrapper-] {
-            display: none;
-        }
+// (subjectively) less intrusive mentions
+[class^=sidebar-] {
+    [class*=unreadTop-], [class*=unreadBottom-] {
+        display:         flex;
+        justify-content: right;
+        padding-right:   0px;
     }
 
-    @if $dm-list-cleanup or $nitro-cleanup {
-        // remove nitro tab in dm list
-        .content-2a4AW9>li:nth-of-type(2) { display:none; }
+    [class*=unreadTop-] [class*=unreadBar-] {
+        background-image: url(mdi.$up-arrow-thin-w);
+    }
+    
+    [class*=unreadDown-] [class*=unreadBar-] {
+        background-image: url(mdi.$down-arrow-thin-w);
     }
 
-    @if $dm-list-cleanup {
-        // remove crisis line advert
-        [class*=snowsgivingLink-] { display: none; }
-    }
+    [class*=unreadBar-] {
+        // background space
+        background-size:     20px 20px;
+        background-repeat:   no-repeat;
+        background-position: 15px 0.0px;
 
-    [class^=imageAccessory-] {
-        // move star back where it belongss
-        @if $fix-star {
-            left:  unset;
-            right: 6px;
-        }
+        // bulletification
+        padding: 0;
+        padding-right: 15px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
 
-        // make the star black and white :3
-        [class*=selected-] svg, svg:hover {
-            filter: invert(100%) grayscale(100%) brightness(500%);
-        }
-    }
+        span {
+            font-size: 0px;
+            position:  relative;
+            &::after {
+                position:   absolute;
+                top:        0px;
+                left:       0px;
 
-    // make user profile toast a solid color (stupid discord...)
-    @if $solid-profile {
-        [class^=userPopoutInner-] {
-            --profile-avatar-border-color: var(--profile-body-background-color);
-            
-            background: var(--profile-body-background-color);
-        }
-
-        [class^=overlayBackground-] {
-            margin: 21px 0px 0px;
-        }
-    }
-
-    // transgender british flag
-    @if $jkr-is-a-trans-icon {
-        [class^=inspector-] img[alt=\:flag_gb\:], [data-type=emoji]:is([data-name=\:flag_gb\:],[data-name=flag_gb]) {
-            -moz-box-sizing: border-box;
-            box-sizing:      border-box;
-            background:      url(images.$betterbong) no-repeat;
-
-            width:           1.375em;
-            height:          1.375em;
-            padding-left:    1.375em;
-
-            &:is(img) {
-                width:        28px;
-                height:       28px;
-                padding-left: 28px;
-            }
-
-            &.jumboable {
-                width:        3rem;
-                height:       3rem;
-                padding-left: 3rem;
-            }
-
-            &[class*=emojiItemMedium-] {
-                width:  40px;
-                height: 40px;
-                margin: 4px;
-            }
-
-            div[class^=emojiSpriteImage] {
-                display: none;
+                font-size:  12px;
+                content:    "!";
             }
         }
     }
 
-    // remove help button. you know you wont ever use it
-    @if $remove-help {
-        [class^=toolbar-] {
-            a[href=https\:\/\/support\.discord\.com], [aria-label=Notification\ Settings] {
-                display: none;
-            }
+    .container-24rGVp {
+        justify-content: right;
+
+        [class*=mentionsBar-] {
+            background-size:     20px 20px;
+            background-repeat:   no-repeat;
+            background-position: 15px 0.0px;
         }
-    }
 
-    // collapsible search bar
-    @if $better-search-bar {
-        [class^=search-]:not([class*=open-])>[class^=searchBar-] {
-            width:      24px;
-            background: transparent;
-
-            >[class^=icon-] {
-                // da hand
-                cursor: pointer;
-
-                // do some horrible stretching thing to make it look like a normal icon
-                svg {
-                    width:  24px;
-                    height: 24px;
-
-                    margin-left: -3px;
-                    margin-top:  -3px;
-
-                    color: var(--interactive-normal);
-                }
-
-                // change color like a normal icon
-                &:hover svg {
-                    color: var(--interactive-hover);
-                }
-            }
+        &[class*=top-] [class*=mentionsBar-] {
+            background-image: url(mdi.$up-arrow-thin-w);
         }
-    }
 
-    // (subjectively) less intrusive mentions
-    @if $fix-mentions {
-        [class^=sidebar-] {
-            [class*=unreadTop-], [class*=unreadBottom-] {
-                display:         flex;
-                justify-content: right;
-                padding-right:   0px;
-            }
+        &[class*=bottom-] [class*=mentionsBar-] {
+            background-image: url(mdi.$down-arrow-thin-w);
+        }
 
-            [class*=unreadTop-] [class*=unreadBar-] {
-                background-image: url(mdi.$up-arrow-thin-w);
-            }
-            
-            [class*=unreadDown-] [class*=unreadBar-] {
-                background-image: url(mdi.$down-arrow-thin-w);
-            }
+        [class*=mentionsBar-] {
+            // makes the pill a bullet
+            padding: 0;
+            padding-right: 15px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
 
-            [class*=unreadBar-] {
-                // background space
-                background-size:     20px 20px;
-                background-repeat:   no-repeat;
-                background-position: 15px 0.0px;
+            >div {
+                // makes it round
+                padding:      0;
+                text-align:   center;
+                line-height:  20px;
+                width:        20px;
+                height:       20px;
 
-                // bulletification
-                padding: 0;
-                padding-right: 15px;
-                border-top-right-radius: 0px;
-                border-bottom-right-radius: 0px;
-                width: 20px;
-                height: 20px;
-                text-align: center;
-                line-height: 20px;
-
-                span {
-                    font-size: 0px;
-                    position:  relative;
-                    &::after {
-                        position:   absolute;
-                        top:        0px;
-                        left:       0px;
-
-                        font-size:  12px;
-                        content:    "!";
-                    }
-                }
-            }
-
-            .container-24rGVp {
-                justify-content: right;
-
-                [class*=mentionsBar-] {
-                    background-size:     20px 20px;
-                    background-repeat:   no-repeat;
-                    background-position: 15px 0.0px;
-                }
-
-                &[class*=top-] [class*=mentionsBar-] {
-                    background-image: url(mdi.$up-arrow-thin-w);
-                }
-
-                &[class*=bottom-] [class*=mentionsBar-] {
-                    background-image: url(mdi.$down-arrow-thin-w);
-                }
-
-                [class*=mentionsBar-] {
-                    // makes the pill a bullet
-                    padding: 0;
-                    padding-right: 15px;
-                    border-top-right-radius: 0px;
-                    border-bottom-right-radius: 0px;
-
-                    >div {
-                        // makes it round
-                        padding:      0;
-                        text-align:   center;
-                        line-height:  20px;
-                        width:        20px;
-                        height:       20px;
-
-                        // gets the funny number
-                        --status-danger-text-real: var(--status-danger-text);
-                        --status-danger-text: #00000000;
-                        font-size: 0px;
-                        word-spacing: 1000px;
-                        &::first-line {
-                            color:        var(--white-500);
-                            word-spacing: 0px;
-                            font-size:    12px;
-                            font-weight:  700;
-                        }
-                    }
+                // gets the funny number
+                --status-danger-text-real: var(--status-danger-text);
+                --status-danger-text: #00000000;
+                font-size: 0px;
+                word-spacing: 1000px;
+                &::first-line {
+                    color:        var(--white-500);
+                    word-spacing: 0px;
+                    font-size:    12px;
+                    font-weight:  700;
                 }
             }
         }
