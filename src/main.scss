@@ -1,5 +1,7 @@
 @use "images.scss";
 @use "mdi.scss"     as mdi;
+@use "colors"       as *;
+@use "sass:color";
 
 @mixin aven_font($name, $styles, $widths) {
     @each $style in $styles {
@@ -28,12 +30,12 @@
     --font-display: "ABC Ginto Normal", sans-serif !important;
 
     // add darker colors
-    @include discord_color(primary-dark-500, #1f1f1f);
-    @include discord_color(primary-dark-560, #181818);
-    @include discord_color(primary-dark-600, #121212);
-    @include discord_color(primary-dark-630, #0f0f0f);
-    @include discord_color(primary-dark-660, #0b0b0b);
-    @include discord_color(primary-dark-700, #080808);
+    @include discord_color(primary-dark-500, $black-500);
+    @include discord_color(primary-dark-560, $black-560);
+    @include discord_color(primary-dark-600, $black-600);
+    @include discord_color(primary-dark-630, $black-630);
+    @include discord_color(primary-dark-660, $black-660);
+    @include discord_color(primary-dark-700, $black-700);
 
     // this shit is annoying
     --profile-body-background-color: var(--background-secondary-alt);
@@ -42,6 +44,55 @@
     --scrollbar-thin-thumb: #202020;
     --scrollbar-auto-thumb: #202020;
     --scrollbar-auto-track:   transparent;
+
+    // mentions a bit nicer
+    --background-mentioned:       #{color.adjust($blue-500, $alpha: -0.90)};
+    --background-mentioned-hover: #{color.adjust($blue-500, $alpha: -0.92)};
+    --mention-background:         #{color.adjust($blue-500, $alpha: -0.60)};
+}
+
+[class*=mentioned-]::before {
+    background-color: $blue-500;
+}
+
+// BETA BETA shut upp
+[class=textBadge-1fdDPJ\ base-3IDx3L\ eyebrow-132Xza\ baseShapeRound-3epLEv] {
+    display: none;
+}
+
+// fix attachment borders
+[class^=mediaAttachmentsContainer-] {
+    &, [class*=oneByOneGridSingle-]  {
+        border-radius: 2px;
+    }
+
+    [class*=oneByOneGridSingle-] [class*=hoverButtonGroup-] {
+        background:    linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%); 
+        border-radius: 0;
+
+        top:              0px;
+        right:            0px;
+        left:             0px;
+        padding:          8px;
+        padding-bottom:   0px;
+
+        [class*=hoverButton-] {
+            margin-left: auto; // sit comfortably on the right
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        [class*=downloadHoverButtonIcon-] {
+            height: 28px;
+            width:  28px;
+        }
+
+        [class*=removeAttachmentHoverButton-] {
+            display: none;
+        }
+    }
 }
 
 [class^=imageAccessory-] {
