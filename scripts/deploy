@@ -2,9 +2,9 @@
 
 if ! which sass > /dev/null; then npm i --global sass; fi;
 rm -rf deploy;
-mkdir -p deploy;
-sass src/main.scss > deploy/sane-discord.css;
+mkdir -p deploy/theme;
+sass src/main.scss > deploy/theme/sane-discord.css;
 cd src;
-find . -name '*.svg' -exec cp {} ../deploy/{} \; ;
+find . -name '*.svg' -exec cp {} ../deploy/theme/{} \; ;
 cd ..;
 
