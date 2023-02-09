@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if ! which sass > /dev/null; then npm i --global sass; fi;
+rm -rf deploy;
+mkdir -p deploy;
+sass src/main.scss > deploy/sane-discord.css;
+cd src;
+find . -name '*.svg' -exec cp {} ../deploy/{} \; ;
+cd ..;
+
