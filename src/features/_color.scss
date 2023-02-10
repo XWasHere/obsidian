@@ -1,0 +1,20 @@
+@use "sass:meta";
+
+@mixin apply($colorset) {
+	:root, .default-colors {
+		// apply colors
+		@each $name, $color in $colorset {
+			@if meta.type-of($color) == "map" {
+				@each $level, $value in $color {
+					--#{$name}-#{$level}:     #{$value};
+					--#{$name}-#{$level}-rgb: #{red($value)}, #{blue($value)}, #{green($value)};
+				}
+			} @else if meta.type-of($color) == "color" {
+				--#{$name}:     #{$color};
+				--#{$name}-rgb: #{red($color)}, #{blue($color)}, #{green($color)};
+			} @else {
+				@error "color #{$name} cannot be '#{meta.type-of($color)}'";
+			}
+		}
+	}
+}
