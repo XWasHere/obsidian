@@ -4,7 +4,7 @@
 @use "../util/colorset" as cs;
 
 @mixin apply($s) {
-	:root {
+	:root, .default-colors {
 		@include cs.cs-each($s) using ($name) {
 			@if cs.cs-is($s, $name, "color") {
 				@if cs.csc-has-variants($s, $name) {

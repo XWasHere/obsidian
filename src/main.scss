@@ -3,8 +3,10 @@
 @use 'features/declutter' as f_declutter;
 @use 'features/search'    as f_search;
 @use 'features/sidebar'   as f_sidebar;
+@use 'features/profiles'  as f_profiles;
+@use 'features/embed'     as f_embed;
 
-@use 'colorsets/classic' as cur_colorset;
+@use 'colorsets/classic'  as cur_colorset;
 
 $colorset: cur_colorset.$colorset;
 
@@ -13,3 +15,5 @@ $colorset: cur_colorset.$colorset;
 @include f_declutter.apply($colorset);
 @include f_search.apply($colorset);
 @include f_sidebar.apply($colorset);
+@include f_profiles.apply($colorset);
+@include f_embed.apply($colorset);
