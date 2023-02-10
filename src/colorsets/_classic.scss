@@ -1,15 +1,26 @@
+@use "sass:color" as s_color;
+@use "../util/colorset" as *;
+
 $version: 1;
 $colorset: (
-	primary-dark: (
+	font-primary: font("aven", $name: "Whitney",          $styles: normal italic, $widths: 300 400 500 600 700, $class: sans-serif, $important: true),
+	font-display: font("aven", $name: "ABC Ginto Normal", $styles: normal italic, $widths:     400 500     700, $class: sans-serif, $important: true),
+
+	primary-dark: color($variants: (
 		500: #1f1f1f,
 		560: #181818,
 		600: #121212,
 		630: #0f0f0f,
 		660: #0b0b0b,
 		700: #080808
-	),
+	)),
 
-	scrollbar-thin-thumb: #202020,
-	scrollbar-auto-thumb: #202020,
-	scrollbar-auto-track: #00000000,
+	scrollbar-thin-thumb: color(#202020),
+	scrollbar-auto-thumb: color(#202020),
+	scrollbar-auto-track: color(#00000000),
+
+	pill-mentioned:             color(s_color.adjust(#404080)),
+	background-mentioned:       color(s_color.adjust(#404080, $alpha: -0.90)),
+    background-mentioned-hover: color(s_color.adjust(#404080, $alpha: -0.92)),
+    mention-background:         color(s_color.adjust(#404080, $alpha: -0.60))
 );

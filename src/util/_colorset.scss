@@ -1,0 +1,72 @@
+@use "sass:map";
+@use "sass:meta";
+
+@function font($source, $name: null, $styles: null, $widths: null, $class: null, $important: false) {
+    @if not ($source == "aven") {
+        @error "unknown font source \"#{$source}\"";
+    }
+
+    @return (
+        type:      "font",
+        source:    $source,
+        name:      $name,
+        styles:    $styles,
+        widths:    $widths,
+        class:     $class,
+        important: $important
+    );
+}
+
+@function color($color: null, $variants: null) {
+    @return (
+        type:     "color",
+        color:    $color,
+        variants: $variants
+    );
+}
+
+@function cs-is($colorset, $name, $type) {
+    @return map.get(map.get($colorset, $name), "type") == $type;
+}
+
+@mixin cs-each($colorset) {
+    @each $name, $color in $colorset {
+        @content($name);
+    }
+}
+
+@function csc-get-color($colorset, $name, $variant: null) {
+    @if $variant { 
+        @return map.get(csc-get-variants($colorset, $name), $variant);
+    } @else {
+        @return map.get(map.get($colorset, $name), "color");
+    }
+}
+
+@function csc-get-variants($colorset, $name) {
+    @return map.get(map.get($colorset, $name), "variants");
+}
+
+@function csc-has-variants($colorset, $name) {
+    @return map.get(map.get($colorset, $name), "variants") != null;
+}
+
+@function csf-get-name($colorset, $name) {
+    @return map.get(map.get($colorset, $name), "name");
+}
+
+@function csf-get-class($colorset, $name) {
+    @return map.get(map.get($colorset, $name), "class");
+}
+
+@function csf-get-important($colorset, $name) {
+    @return map.get(map.get($colorset, $name), "important");
+}
+
+@function csf-get-styles($colorset, $name) {
+    @return map.get(map.get($colorset, $name), "styles");
+}
+
+@function csf-get-widths($colorset, $name) {
+    @return map.get(map.get($colorset, $name), "widths");
+}
