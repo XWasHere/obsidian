@@ -1,5 +1,6 @@
-@use 'features/color'    as f_color;
-@use 'features/font'     as f_font;
+@use 'features/color'     as f_color;
+@use 'features/font'      as f_font;
+@use 'features/declutter' as f_declutter;
 
 @use 'colorsets/classic' as cur_colorset;
 
@@ -7,3 +8,4 @@ $colorset: cur_colorset.$colorset;
 
 @include f_color.apply($colorset);
 @include f_font.apply($colorset);
+@include f_declutter.apply($colorset);
