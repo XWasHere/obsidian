@@ -1,0 +1,97 @@
+@use "../util/mdi";
+
+@mixin apply($s) {
+    // (subjectively) less intrusive mentions
+    [class^=sidebar-] {
+        [class*=unreadTop-], [class*=unreadBottom-] {
+            display:         flex;
+            justify-content: right;
+            padding-right:   0px;
+        }
+
+        [class*=unreadTop-] [class*=unreadBar-] {
+            background-image: url(mdi.$up-arrow-thin-w);
+        }
+        
+        [class*=unreadDown-] [class*=unreadBar-] {
+            background-image: url(mdi.$down-arrow-thin-w);
+        }
+
+        [class*=unreadBar-] {
+            // background space
+            background-size:     20px 20px;
+            background-repeat:   no-repeat;
+            background-position: 15px 0.0px;
+
+            // bulletification
+            padding: 0;
+            padding-right: 15px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+
+            span {
+                font-size: 0px;
+                position:  relative;
+                &::after {
+                    position:   absolute;
+                    top:        0px;
+                    left:       0px;
+
+                    font-size:  12px;
+                    content:    "!";
+                }
+            }
+        }
+
+        .container-24rGVp {
+            justify-content: right;
+
+            [class*=mentionsBar-] {
+                background-size:     20px 20px;
+                background-repeat:   no-repeat;
+                background-position: 15px 0.0px;
+            }
+
+            &[class*=top-] [class*=mentionsBar-] {
+                background-image: url(mdi.$up-arrow-thin-w);
+            }
+
+            &[class*=bottom-] [class*=mentionsBar-] {
+                background-image: url(mdi.$down-arrow-thin-w);
+            }
+
+            [class*=mentionsBar-] {
+                // makes the pill a bullet
+                padding: 0;
+                padding-right: 15px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+
+                >div {
+                    // makes it round
+                    padding:      0;
+                    text-align:   center;
+                    line-height:  20px;
+                    width:        20px;
+                    height:       20px;
+
+                    // gets the funny number
+                    --status-danger-text-real: var(--status-danger-text);
+                    --status-danger-text: #00000000;
+                    font-size: 0px;
+                    word-spacing: 1000px;
+                    &::first-line {
+                        color:        var(--white-500);
+                        word-spacing: 0px;
+                        font-size:    12px;
+                        font-weight:  700;
+                    }
+                }
+            }
+        }
+    }
+}

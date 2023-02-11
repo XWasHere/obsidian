@@ -1,0 +1,12 @@
+@mixin apply($s) {
+    // make user profile background a solid color
+    [class^=userPopoutInner-], [class^=userProfileModalInner-] {
+        --profile-avatar-border-color:   var(--profile-body-background-color);
+        
+        background: var(--profile-body-background-color) !important;
+    }
+    
+    [class^=overlayBackground-] {
+        margin: 21px 0px 0px;
+    }
+}

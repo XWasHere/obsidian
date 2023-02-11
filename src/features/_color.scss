@@ -1,0 +1,27 @@
+@use "sass:meta";
+@use "sass:map";
+
+@use "../util/colorset" as cs;
+
+@mixin apply($s) {
+	:root, .default-colors {
+		@include cs.cs-each($s) using ($name) {
+			@if cs.cs-is($s, $name, "color") {
+				@if cs.csc-has-variants($s, $name) {
+					@each $vname, $value in cs.csc-get-variants($s, $name) {
+						--#{$name}-#{$vname}:     #{$value};
+						--#{$name}-#{$vname}-rgb: #{red($value)}, #{blue($value)}, #{green($value)};
+					}
+				} @else {
+					$value: cs.csc-get-color($s, $name);
+					--#{$name}:     #{$value};
+					--#{$name}-rgb: #{red($value)}, #{blue($value)}, #{green($value)};
+				}
+			}
+		}
+	}
+
+	[class*=mentioned-]::before {
+		background-color: #{cs.csc-get-color($s, "pill-mentioned")};
+	}
+}
