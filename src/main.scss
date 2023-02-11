@@ -5,6 +5,7 @@
 @use 'features/sidebar'   as f_sidebar;
 @use 'features/profiles'  as f_profiles;
 @use 'features/embed'     as f_embed;
+@use 'features/emoji'     as f_emoji;
 
 @use 'colorsets/classic'  as cur_colorset;
 
@@ -17,3 +18,4 @@ $colorset: cur_colorset.$colorset;
 @include f_sidebar.apply($colorset);
 @include f_profiles.apply($colorset);
 @include f_embed.apply($colorset);
+@include f_emoji.apply($colorset);
