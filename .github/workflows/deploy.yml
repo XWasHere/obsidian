@@ -1,10 +1,13 @@
 name: deploy
 on:
   push:
-    - main
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      GH_SECRET: ${{ secrets.GH_SECRET }}
     steps:
       - name: deploy
         run: |
