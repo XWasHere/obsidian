@@ -24,4 +24,8 @@
 	[class*=mentioned-]::before {
 		background-color: #{cs.csc-get-color($s, "pill-mentioned")};
 	}
+
+	.rs-chan-hidden [class^=name-] {
+		text-decoration: line-through;
+	}
 }

@@ -32,7 +32,7 @@
     }
 
     // remove nitro tab in dm list
-    .content-2a4AW9>li:nth-of-type(2) {
+    [class^=privateChannels] .content-2a4AW9>li:nth-of-type(2) {
         display:none;
     }
 
@@ -45,5 +45,10 @@
         a[href=https\:\/\/support\.discord\.com], [aria-label=Notification\ Settings] {
             display: none;
         }
+    }
+
+    // remove wave to say hello buttons
+    [class^=welcomeCTA-], [class^=scrollerInner-]>[class^=containerCompact-] {
+        display: none;
     }
 }
