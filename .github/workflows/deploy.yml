@@ -1,0 +1,11 @@
+name: deploy
+on:
+  push:
+    - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run: |
+          curl -H "Authorization: Bearer $GH_SECRET" -d '{"event_type":"pagesbuild"}' https://api.github.com/repos/xwashere/xwashere.github.io/dispatches'
