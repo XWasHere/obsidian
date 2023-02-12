@@ -51,4 +51,20 @@
     [class^=welcomeCTA-], [class^=scrollerInner-]>[class^=containerCompact-] {
         display: none;
     }
+
+    // remove browse channels
+    [aria-label=Channels] {
+        [class^=containerDefault-]:not([data-dnd-name]) {
+            display: none;
+
+            & + [class^=sectionDivider-] {
+                display: none;
+            }
+        }
+    }
+
+    // remove thread suggestion thing
+    [class^=threadSuggestionBar-] {
+        display: none;
+    }
 }
