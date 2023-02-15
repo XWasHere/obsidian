@@ -67,4 +67,9 @@
     [class^=threadSuggestionBar-] {
         display: none;
     }
+
+    // remove top emojis
+    [class^=categorySection-]:has(div[class^=topEmojiSectionContainer-]) {
+        display: none;
+    }
 }

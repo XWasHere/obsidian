@@ -35,11 +35,15 @@
     }
 }
 
-@function csc-get-color($colorset, $name, $variant: null) {
-    @if $variant { 
-        @return map.get(csc-get-variants($colorset, $name), $variant);
+@function csc-get-color($colorset, $name, $variant: null, $default: null) {
+    @if map.has-key($colorset, $name) {
+        @if $variant { 
+            @return map.get(csc-get-variants($colorset, $name), $variant);
+        } @else {
+            @return map.get(map.get($colorset, $name), "color");
+        }
     } @else {
-        @return map.get(map.get($colorset, $name), "color");
+        @return $default;
     }
 }
 
