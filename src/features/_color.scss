@@ -11,11 +11,13 @@
 					@each $vname, $value in cs.csc-get-variants($s, $name) {
 						--#{$name}-#{$vname}:     #{$value};
 						--#{$name}-#{$vname}-rgb: #{red($value)}, #{blue($value)}, #{green($value)};
+						--#{$name}-#{$vname}-hsl: #{hue($value)}, #{saturation($value)}, #{lightness($value)};
 					}
 				} @else {
 					$value: cs.csc-get-color($s, $name);
 					--#{$name}:     #{$value};
 					--#{$name}-rgb: #{red($value)}, #{blue($value)}, #{green($value)};
+					--#{$name}-hsl: #{hue($value)}, #{saturation($value)}, #{lightness($value)};
 				}
 			}
 		}
@@ -35,5 +37,21 @@
 
 	[class^=expandedFolderBackground-] { // bruh...
 		background-color: #{cs.csc-get-color($s, "expanded-folder-background", $default:var(--background-secondary))} !important;
+	}
+
+	[class^=button-][class*=colorPrimary-] {
+		color: #{cs.csc-get-color($s, "button-primary-text", $default:var(--text-primary))}
+	}
+
+	[class*=modeUnread-] [class^=name-] {
+		color: #{cs.csc-get-color($s, "channels-unread", $default:var(--interactive-active))}
+	}
+
+	[class*=modeSelected-] [class^=name-] {
+		color: #{cs.csc-get-color($s, "channels-selected", $default:var(--interactive-active))}
+	}
+
+	:is([class*=modeUnread-], [class*=modeSelected]):hover [class^=name-] {
+		color: #{cs.csc-get-color($s, "channels-hover", $default:var(--interactive-active))}
 	}
 }

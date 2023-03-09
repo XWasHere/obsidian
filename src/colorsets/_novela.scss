@@ -16,7 +16,10 @@ $colorset: (
     interactive-normal: color(#282828),
     interactive-active: color(#002ba1),
 
-    channels-default: color(#101010),
+    channels-default:  color(#101010),
+    channels-unread:   color(#101020),
+    channels-selected: color(#101010),
+    channels-hover:    color(#101010),
 
     scrollbar-thin-thumb: color(#202020),
 	scrollbar-auto-thumb: color(#202020),
@@ -28,5 +31,5 @@ $colorset: (
     mention-background:         color(s_color.adjust(#404080, $alpha: -0.80)),
     mention-foreground:         color(#202080),
 
-    reaction-background: color(#d0d0d0)
+    reaction-background: color(#d0d0d0),
 );

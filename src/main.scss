@@ -1,3 +1,5 @@
+$colorset: "obsidian" !default;
+
 @use 'features/color'     as f_color;
 @use 'features/font'      as f_font;
 @use 'features/declutter' as f_declutter;
@@ -7,10 +9,14 @@
 @use 'features/embed'     as f_embed;
 @use 'features/emoji'     as f_emoji;
 
-@use 'colorsets/classic'  as cur_colorset;
+// if you add something to /colorsets add it here too
+@use 'colorsets/obsidian' as c_obsidian;
+@use 'colorsets/novela'   as c_novela;
+@if      $colorset == "obsidian" { $colorset: c_obsidian.$colorset; }
+@else if $colorset == "novela"   { $colorset: c_novela.$colorset;   }
+@else                            { @error "unknown colorset \"#{$colorset}\""; }
 
-$colorset: cur_colorset.$colorset;
-
+// you can comment these out to exclude bits of the theme
 @include f_color.apply($colorset);
 @include f_font.apply($colorset);
 @include f_declutter.apply($colorset);
