@@ -1,75 +1,77 @@
 @mixin apply($s) {
-    // get rid of the stupid beta badge
-    [class=textBadge-1fdDPJ\ base-3IDx3L\ eyebrow-132Xza\ baseShapeRound-3epLEv] {
-        display: none;
-    }
+	// get rid of the stupid beta badge
+	[class=textBadge-1fdDPJ\ base-3IDx3L\ eyebrow-132Xza\ baseShapeRound-3epLEv] {
+		display: none;
+	}
 
-    // make nitro tab in settings less flashy
-    [aria-label=Nitro] > [class*=premiumLabel-] {
-        color: #DEADDD00;
+	// make nitro tab in settings less flashy
+	[aria-label=Nitro]>[class*=premiumLabel-] {
+		color: #deaddd00;
 
-        &:before {
-            color:    var(--interactive-normal);
-            content: "10$ for a gif in my pfp???";
-        }
-    }
+		&:before {
+			color: var(--interactive-normal);
+			content: "10$ for a gif in my pfp???";
+		}
+	}
 
-    // remove command and thread attachment buttons :/
-    #channel-attach-THREAD, #channel-attach-SLASH_COMMAND {
-        display: none;
-    }
+	// remove command and thread attachment buttons :/
+	#channel-attach-THREAD, #channel-attach-SLASH_COMMAND {
+		display: none;
+	}
 
-    // remove nitro and sticker buttons
-    [class^=channelTextArea-] [class^=buttons-] {
-        >:nth-child(1), >:nth-child(3) {
-            display: none;
-        }
-    }
-    
-    // remove "NEW GARBAGE" popout 
-    [id^=popout_] [class*=upsellTooltipWrapper-] {
-        display: none;
-    }
+	// remove nitro and sticker buttons
+	[class^=channelTextArea-] [class^=buttons-] {
+		> :nth-child(1),
+		> :nth-child(3) {
+			display: none;
+		}
+	}
 
-    // remove nitro tab in dm list
-    [class^=privateChannels] .content-2a4AW9>li:nth-of-type(2) {
-        display:none;
-    }
+	// remove "NEW GARBAGE" popout
+	[id^=popout_] [class*=upsellTooltipWrapper-] {
+		display: none;
+	}
 
-    // remove crisis line advert
-    [class*=snowsgivingLink-] { display: none; }
+	// remove nitro tab in dm list
+	[class^=privateChannels] .content-2a4AW9 > li:nth-of-type(2) {
+		display: none;
+	}
 
+	// remove crisis line advert
+	[class*=snowsgivingLink-] {
+		display: none;
+	}
 
-    // remove help button. you know you wont ever use it
-    [class^=toolbar-] {
-        a[href=https\:\/\/support\.discord\.com], [aria-label=Notification\ Settings] {
-            display: none;
-        }
-    }
+	// remove help button. you know you wont ever use it
+	[class^=toolbar-] {
+		a[href=https\:\/\/support\.discord\.com], [aria-label=Notification\ Settings] {
+			display: none;
+		}
+	}
 
-    // remove wave to say hello buttons
-    [class^=welcomeCTA-], [class^=scrollerInner-]>[class^=containerCompact-] {
-        display: none;
-    }
+	// remove wave to say hello buttons
+	[class^=elcomeCTA-], [class^=scrollerInner-] > [class^=containerCompact-] {
+		display: none;
+	}
 
-    // remove browse channels
-    [aria-label=Channels] {
-        [class^=containerDefault-]:not([data-dnd-name]) {
-            display: none;
+	// remove browse channels
+	[aria-label=Channels] {
+		[class^=containerDefault-]:not([data-dnd-name]) {
+			display: none;
 
-            & + [class^=sectionDivider-] {
-                display: none;
-            }
-        }
-    }
+			&+[class^=sectionDivider-] {
+				display: none;
+			}
+		}
+	}
 
-    // remove thread suggestion thing
-    [class^=threadSuggestionBar-] {
-        display: none;
-    }
+	// remove thread suggestion thing
+	[class^=threadSuggestionBar-] {
+		display: none;
+	}
 
-    // remove top emojis
-    [class^=categorySection-]:has(div[class^=topEmojiSectionContainer-]) {
-        display: none;
-    }
+	// remove top emojis
+	[class^=categorySection-]:has(div[class^=topEmojiSectionContainer-]) {
+		display: none;
+	}
 }

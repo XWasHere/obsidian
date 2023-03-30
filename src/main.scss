@@ -8,6 +8,7 @@ $colorset: "obsidian" !default;
 @use 'features/profiles'  as f_profiles;
 @use 'features/embed'     as f_embed;
 @use 'features/emoji'     as f_emoji;
+@use 'features/blocked'   as f_blocked;
 
 // if you add something to /colorsets add it here too
 @use 'colorsets/obsidian' as c_obsidian;
@@ -25,3 +26,4 @@ $colorset: "obsidian" !default;
 @include f_profiles.apply($colorset);
 @include f_embed.apply($colorset);
 @include f_emoji.apply($colorset);
+@include f_blocked.apply($colorset);

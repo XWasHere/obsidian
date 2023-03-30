@@ -4,18 +4,21 @@
 @use "../util/colorset" as cs;
 
 @mixin apply($s) {
-	:root, .default-colors, .theme-dark, .theme-light {
+	:root,
+	.default-colors,
+	.theme-dark,
+	.theme-light {
 		@include cs.cs-each($s) using ($name) {
 			@if cs.cs-is($s, $name, "color") {
 				@if cs.csc-has-variants($s, $name) {
 					@each $vname, $value in cs.csc-get-variants($s, $name) {
-						--#{$name}-#{$vname}:     #{$value};
+						--#{$name}-#{$vname}: #{$value};
 						--#{$name}-#{$vname}-rgb: #{red($value)}, #{blue($value)}, #{green($value)};
 						--#{$name}-#{$vname}-hsl: #{hue($value)}, #{saturation($value)}, #{lightness($value)};
 					}
 				} @else {
 					$value: cs.csc-get-color($s, $name);
-					--#{$name}:     #{$value};
+					--#{$name}: #{$value};
 					--#{$name}-rgb: #{red($value)}, #{blue($value)}, #{green($value)};
 					--#{$name}-hsl: #{hue($value)}, #{saturation($value)}, #{lightness($value)};
 				}
@@ -23,35 +26,44 @@
 		}
 	}
 
-	[class*=mentioned-]::before {
+	[class*="mentioned-"]::before {
 		background-color: #{cs.csc-get-color($s, "pill-mentioned")};
 	}
 
-	[class^=reaction-] {
-		background-color: #{cs.csc-get-color($s, "reaction-background", $default:var(--background-secondary))};
+	[class^="reaction-"] {
+		background-color: #{cs.csc-get-color(
+				$s,
+				"reaction-background",
+				$default: var(--background-secondary)
+			)};
 	}
 
-	[class^=mainContent-]:not([href])>[aria-label^=Text]+[class^=name-] {
+	[class^="mainContent-"]:not([href]) > [aria-label^="Text"] + [class^="name-"] {
 		text-decoration: line-through;
 	}
 
-	[class^=expandedFolderBackground-] { // bruh...
-		background-color: #{cs.csc-get-color($s, "expanded-folder-background", $default:var(--background-secondary))} !important;
+	[class^="expandedFolderBackground-"] {
+		// bruh...
+		background-color: #{cs.csc-get-color(
+				$s,
+				"expanded-folder-background",
+				$default: var(--background-secondary)
+			)} !important;
 	}
 
-	[class^=button-][class*=colorPrimary-] {
-		color: #{cs.csc-get-color($s, "button-primary-text", $default:var(--text-primary))}
+	[class^="button-"][class*="colorPrimary-"] {
+		color: #{cs.csc-get-color($s, "button-primary-text", $default: var(--text-primary))};
 	}
 
-	[class*=modeUnread-] [class^=name-] {
-		color: #{cs.csc-get-color($s, "channels-unread", $default:var(--interactive-active))}
+	[class*="modeUnread-"] [class^="name-"] {
+		color: #{cs.csc-get-color($s, "channels-unread", $default: var(--interactive-active))};
 	}
 
-	[class*=modeSelected-] [class^=name-] {
-		color: #{cs.csc-get-color($s, "channels-selected", $default:var(--interactive-active))}
+	[class*="modeSelected-"] [class^="name-"] {
+		color: #{cs.csc-get-color($s, "channels-selected", $default: var(--interactive-active))};
 	}
 
-	:is([class*=modeUnread-], [class*=modeSelected]):hover [class^=name-] {
-		color: #{cs.csc-get-color($s, "channels-hover", $default:var(--interactive-active))}
+	:is([class*="modeUnread-"], [class*="modeSelected"]):hover [class^="name-"] {
+		color: #{cs.csc-get-color($s, "channels-hover", $default: var(--interactive-active))};
 	}
 }

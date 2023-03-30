@@ -1,0 +1,6 @@
+// quite opinionated so in its own module
+@mixin apply($s) {
+	div[class^=groupStart-] {
+		display: none;
+	}
+}
