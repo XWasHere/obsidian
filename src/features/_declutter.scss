@@ -33,7 +33,7 @@
 	}
 
 	// remove nitro tab in dm list
-	[class^=privateChannels] .content-2a4AW9 > li:nth-of-type(2) {
+	[class^=privateChannels] [class^=content-] > li:nth-of-type(2) {
 		display: none;
 	}
 
