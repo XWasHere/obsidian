@@ -6,6 +6,10 @@
         background: var(--profile-body-background-color) !important;
     }
     
+    [class^=userInfoText-]>[class^=defaultColor-] {
+        -webkit-line-clamp: unset !important;
+    }
+    
     [class^=overlayBackground-] {
         margin: 21px 0px 0px;
     }
