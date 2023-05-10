@@ -1,0 +1,6 @@
+@mixin apply($s) {
+	// make messages bar thinner
+	[class^=newMessagesBar-] {
+		height: 24px;
+	}
+}

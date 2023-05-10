@@ -1,15 +1,14 @@
 @mixin apply($s) {
-  [class^="imageAccessory-"] {
-    // move star back where it belongss
-    left: unset;
-    right: 6px;
+	[class^=imageAccessory-] {
+		// move star back where it belongss
+		left: unset;
+		right: 6px;
 
-    // make the favorite gif button black and white
-    [class*="selected-"] svg,
-    svg:hover {
-      filter: invert(100%) grayscale(100%) brightness(500%);
-    }
-  }
+		// make the favorite gif button black and white
+		[class*=selected-] svg, svg:hover {
+			filter: invert(100%) grayscale(100%) brightness(500%);
+		}
+  	}
 
   /*// fix attachment borders
     [class^=mediaAttachmentsContainer-] {
