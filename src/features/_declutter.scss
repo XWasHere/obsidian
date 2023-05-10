@@ -70,8 +70,13 @@
 		display: none;
 	}
 
-	// remove top emojis
-	[class^=categorySection-]:has(div[class^=topEmojiSectionContainer-]) {
+	// remove "nitro preview" upsell
+	[class*=tryItOutSection-] {
+		display: none;
+	}
+
+	// hide "do shit with nitro" if the user does not have nitro
+	[class^=upsellOverlayContainer-]:has([class^=upsellOverlay-]) {
 		display: none;
 	}
 }
