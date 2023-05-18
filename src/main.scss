@@ -10,6 +10,7 @@ $colorset: "obsidian" !default;
 @use 'features/emoji'     as f_emoji;
 @use 'features/blocked'   as f_blocked;
 @use 'features/chat'      as f_chat;
+@use 'features/disconnect'as f_disconnect;
 
 // if you add something to /colorsets add it here too
 @use 'colorsets/obsidian' as c_obsidian;
@@ -29,3 +30,4 @@ $colorset: "obsidian" !default;
 @include f_emoji.apply($colorset);
 @include f_blocked.apply($colorset);
 @include f_chat.apply($colorset);
+@include f_disconnect.apply($colorset);

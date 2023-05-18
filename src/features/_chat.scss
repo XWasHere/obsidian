@@ -3,4 +3,39 @@
 	[class^=newMessagesBar-] {
 		height: 24px;
 	}
+
+	// remove redundant avater and only display status in dm header.
+	[class^=title-] {
+		[class*=avatar-] svg {
+			>foreignObject {
+				display: none;
+			}
+
+			>rect {
+				x: 12 !important;
+				y: 6 !important;
+
+				width: 12 !important;
+				height: 12 !important;
+
+				&[mask="url(#svg-mask-status-online-mobile)"] {
+					y: 2 !important;
+
+					width: 12 !important;
+					height: 18 !important;
+				}
+			}
+		}
+
+		>[class^=children-] {
+			// this divider is practically invisible
+			>[class^=divider-] {
+				display: none;
+			}
+
+			>[class^=akaBadge-] {
+				margin-left: 0px;
+			}
+		}
+	}
 }

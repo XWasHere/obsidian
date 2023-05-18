@@ -16,6 +16,11 @@ $colorset: (
 		700: #080808
 	)),
 
+	brand: color($variants: (
+		500: #7f51a8,
+		560: #6f4198
+	)),
+
 	button-primary-text: color(#ffffff),
 
 	scrollbar-thin-thumb: color(#202020),
@@ -24,6 +29,6 @@ $colorset: (
 
 	pill-mentioned:             color(s_color.adjust(#404080)),
 	background-mentioned:       color(s_color.adjust(#404080, $alpha: -0.90)),
-    background-mentioned-hover: color(s_color.adjust(#404080, $alpha: -0.92)),
-    mention-background:         color(s_color.adjust(#404080, $alpha: -0.60))
+        background-mentioned-hover: color(s_color.adjust(#404080, $alpha: -0.92)),
+        mention-background:         color(s_color.adjust(#404080, $alpha: -0.60))
 );
