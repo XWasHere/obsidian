@@ -79,4 +79,23 @@
 	[class^=upsellOverlayContainer-]:has([class^=upsellOverlay-]) {
 		display: none;
 	}
+
+	[class^=userProfileModalInner-] {
+		[class^=nameTag-] + [class^=container-] {
+			display: none;
+		}
+	}
+
+	[class*=usernameSection-]>div>[class^=container-] {
+		display: none;
+	}
+
+	// disable super reaction animations
+	[class^=effectsWrapper-] {
+		display: none;
+	}
+
+	[class*=hideEmoji-] {
+		opacity: 1 !important;
+	}
 }
