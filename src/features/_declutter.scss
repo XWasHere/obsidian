@@ -50,7 +50,7 @@
 	}
 
 	// remove wave to say hello buttons
-	[class^=elcomeCTA-], [class^=scrollerInner-] > [class^=containerCompact-] {
+	[class^=welcomeCTA-], [class^=scrollerInner-] > [class^=containerCompact-] {
 		display: none;
 	}
 
@@ -78,5 +78,30 @@
 	// hide "do shit with nitro" if the user does not have nitro
 	[class^=upsellOverlayContainer-]:has([class^=upsellOverlay-]) {
 		display: none;
+	}
+
+	[class*=colorPremiumGradient-] {
+		&[class*=focused-] {
+			background: var(--brand-experiment-500);
+		}
+
+		+ div [class*=isBurstReactionPicker-] {
+			border: none;
+			box-shadow: none;
+		}
+	}
+
+	[class^=buttons-] {
+		// remove super reaction button from message buttons
+		[aria-label^="Add Super"] {
+			display: none;
+		}
+	}
+
+	[class^=reactions-] {
+		// remove super reaction button from reaction list
+		[aria-label^="Add Super"] {
+			display: none;
+		}
 	}
 }

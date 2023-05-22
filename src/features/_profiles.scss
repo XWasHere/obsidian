@@ -4,6 +4,12 @@
         --profile-avatar-border-color:   var(--profile-body-background-color);
         
         background: var(--profile-body-background-color) !important;
+
+	// make this not thick wtf
+	[class^=nameTag-] {
+		font-family: var(--font-primary);
+		font-weight: 500;
+	}
     }
     
     [class^=userInfoText-]>[class^=defaultColor-] {

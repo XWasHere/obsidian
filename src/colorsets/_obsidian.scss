@@ -12,6 +12,7 @@ $colorset: (
 		560: #181818,
 		600: #121212,
 		630: #0f0f0f,
+		645: #0a0a0a,
 		660: #0b0b0b,
 		700: #080808
 	)),
@@ -30,5 +31,7 @@ $colorset: (
 	pill-mentioned:             color(s_color.adjust(#404080)),
 	background-mentioned:       color(s_color.adjust(#404080, $alpha: -0.90)),
         background-mentioned-hover: color(s_color.adjust(#404080, $alpha: -0.92)),
-        mention-background:         color(s_color.adjust(#404080, $alpha: -0.60))
+        mention-background:         color(s_color.adjust(#404080, $alpha: -0.60)),
+
+	message-deleted: color(#f047f7)
 );

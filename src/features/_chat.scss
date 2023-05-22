@@ -6,28 +6,55 @@
 
 	// remove redundant avater and only display status in dm header.
 	[class^=title-] {
-		[class*=avatar-] svg {
-			>foreignObject {
-				display: none;
+		>[class^=children-] {
+			>* { order: 1; }
+
+			&:not(:has(>[class^=iconWrapper-]))>[class^=hiddenVisually-] {
+				position: unset;
+				overflow: unset;
+
+				display: inline-block;
+
+				margin: 0 8px;
+				width: 24px;
+				height: 24px;
+
+				content: "@";
 			}
 
-			>rect {
-				x: 12 !important;
-				y: 6 !important;
+			>div {
+				>[class*=avatar-] {
+					margin-left: -12px;
 
-				width: 12 !important;
-				height: 12 !important;
+					svg {
+						>foreignObject { display: none; }
+						>rect {
+							x: 12 !important;
+							y: 6 !important;
 
-				&[mask="url(#svg-mask-status-online-mobile)"] {
-					y: 2 !important;
+							width: 12 !important;
+							height: 12 !important;
 
-					width: 12 !important;
-					height: 18 !important;
+							&[mask="url(#svg-mask-status-online-mobile)"] {
+								y: 2 !important;
+
+								width: 12 !important;
+								height: 18 !important;
+							}
+						}
+					}
+				}
+
+				&:has(>[class*=avatar-]) {
+					order: 2;
+					~ * { order: 3; }
 				}
 			}
-		}
 
-		>[class^=children-] {
+			>[class^=titleWrapper] {
+				order: 1 !important;
+			}
+	
 			// this divider is practically invisible
 			>[class^=divider-] {
 				display: none;
@@ -35,6 +62,20 @@
 
 			>[class^=akaBadge-] {
 				margin-left: 0px;
+			}
+		}
+	}
+
+	[class^=markup-] {
+		[class^=timestamp-]>time {
+			span { display: none; }
+
+			&:after {
+				font-size: 0.625rem;
+				font-weight: 400;
+				line-height: 1;
+				user-select: none;
+				content: "(" attr(aria-label) ")";
 			}
 		}
 	}
