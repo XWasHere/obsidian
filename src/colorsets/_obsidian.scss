@@ -33,5 +33,6 @@ $colorset: (
         background-mentioned-hover: color(s_color.adjust(#404080, $alpha: -0.92)),
         mention-background:         color(s_color.adjust(#404080, $alpha: -0.60)),
 
-	message-deleted: color(#f047f7)
+	message-deleted: color(#f047f7),
+	message-deleted-pill: color(#ff4747)
 );

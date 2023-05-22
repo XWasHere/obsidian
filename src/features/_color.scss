@@ -1,5 +1,6 @@
 @use "sass:meta";
 @use "sass:map";
+@use "sass:color";
 
 @use "../util/colorset" as cs;
 
@@ -65,5 +66,21 @@
 
 	:is([class*="modeUnread-"], [class*="modeSelected"]):hover [class^="name-"] {
 		color: #{cs.csc-get-color($s, "channels-hover", $default: var(--interactive-active))};
+	}
+
+	// support for remessagelogger
+	.messagelogger-deleted {
+		&::before {
+			background-color: #{cs.csc-get-color($s, "message-deleted-pill", $default: color.adjust(cs.csc-get-color($s, "message-deleted", $default: #f04747), $lightness: 10%))};
+			
+			content: "";
+			position: absolute;
+			display: block;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			pointer-events: none;
+			width: 2px;
+		}
 	}
 }
