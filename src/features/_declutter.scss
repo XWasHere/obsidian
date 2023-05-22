@@ -98,10 +98,29 @@
 		}
 	}
 
+	[class^=userProfileModalInner-] {
+		[class^=nameTag-] + [class^=container-] {
+			display: none;
+		}
+	}
+
 	[class^=reactions-] {
 		// remove super reaction button from reaction list
 		[aria-label^="Add Super"] {
 			display: none;
 		}
+	}
+
+	[class*=usernameSection-]>div>[class^=container-] {
+		display: none;
+	}
+
+	// disable super reaction animations
+	[class^=effectsWrapper-] {
+		display: none;
+	}
+
+	[class*=hideEmoji-] {
+		opacity: 1 !important;
 	}
 }
