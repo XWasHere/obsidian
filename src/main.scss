@@ -30,4 +30,4 @@ $colorset: "obsidian" !default;
 @include f_emoji.apply($colorset);
 @include f_blocked.apply($colorset);
 @include f_chat.apply($colorset);
-@include f_disconnect.apply($colorset);
+//@include f_disconnect.apply($colorset); // disabled for performance reasons

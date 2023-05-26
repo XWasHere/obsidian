@@ -1,11 +1,11 @@
 @mixin apply($s) {
 	// make messages bar thinner
-	[class^=newMessagesBar-] {
+	div[class^=newMessagesBar-] {
 		height: 24px;
 	}
 
 	// remove redundant avater and only display status in dm header.
-	[class^=title-] {
+	/*\[class^=title-] {
 		>[class^=children-] {
 			>* { order: 1; }
 
@@ -64,7 +64,7 @@
 				margin-left: 0px;
 			}
 		}
-	}
+	}*/
 
 	[class^=markup-] {
 		[class^=timestamp-]>time {
