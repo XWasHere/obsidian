@@ -1,4 +1,9 @@
 @use "sass:map";
+@use "sass:selector";
+@use "sass:color";
+
+@use "util/colorset" as *;
+
 @use 'colorsets/obsidian' as c_obsidian;
 @use 'colorsets/novela'   as c_novela;
 
@@ -14,8 +19,17 @@ $font-display: [
 	(source: "aven", name: "ABC Ginto Normal", styles: normal italic, widths: 400 500 700, class: sans-serif, important: true)
 ] !default;
 
-// feature toggles
-$override-fonts: true !default;
+//- feature toggles -//
+// enable font overrides
+$override-fonts:      true !default;
+// enable color overrides
+$override-colors:     true !default;
+// enable the theme in dark mode
+$include-dark:        true !default;
+// enable the theme in light mode
+$include-light:       true !default;
+// add a pill to deleted messages like mentions and ephermals
+$message-logger-pill: true !default;
 
 @use 'features/color'      as f_color;
 @use 'features/declutter'  as f_declutter;
@@ -28,7 +42,37 @@ $override-fonts: true !default;
 @use 'features/chat'       as f_chat;
 @use 'features/disconnect' as f_disconnect;
 
-$colorset: $colors-dark;
+// wow
+@mixin colored {
+	@if $override-colors {
+		@each $i, $c, $t in [$include-dark $colors-dark ".theme-dark", $include-light $colors-light ".theme-light"] {
+			@if $i {
+				@each $s in & {
+					@if $s == null {
+					       @at-root #{$t} {
+						       @content($c);
+					       }
+					} @else if selector.is-superselector(".theme-dark, .theme-light, .theme-dark *, .theme-light *", $s) {
+						@at-root #{$s} {
+							@content($c);
+						}
+					} @else {
+						@at-root #{selector.unify("#{$t} *", $s)} {
+							@content($c);
+						}
+					}
+				}
+			}
+		}
+	} @else { @content(map.empty()); }
+}
+
+// discord is special and needs three different color things
+@mixin dsc-color($name, $color) {
+	--#{$name}: #{$color};
+	--#{$name}-rgb: #{red($color)}, #{blue($color)}, #{green($color)};
+	--#{$name}-hsl: #{hue($color)}, #{saturation($color)}, #{lightness($color)};
+}
 
 // replace fonts
 @if $override-fonts {
@@ -56,15 +100,92 @@ $colorset: $colors-dark;
 	}
 }
 
+// color overrides
+@if $override-colors {
+	@include colored using ($s) {
+		@include cs-each($s) using ($name) {
+			@if cs-is($s, $name, "color") {
+				@if csc-has-variants($s, $name) {
+					@each $vname, $value in csc-get-variants($s, $name){
+						@include dsc-color("#{$name}-#{$vname}",$value);
+					}
+				}
+
+				@if map.get(map.get($s, $name), "color") != null {
+					@include dsc-color($name,csc-get-color($s,$name));
+				}
+			}
+		}
+
+		[class*="mentioned-"]::before {
+			background-color: #{csc-get-color($s, "pill-mentioned")};
+		}
+
+		[class*="reaction-"] {
+			background-color: #{csc-get-color(
+				$s,
+				"reaction-background",
+				$default: var(--background-secondary)
+			)};
+		}
+
+		[class^="mainContent-"]:not([href]) > [aria-label^="Text"] + [class^="name-"] {
+			text-decoration: line-through;
+		}
+
+		[class^="expandedFolderBackground-"] {
+			background-color: #{csc-get-color(
+				$s,
+				"expanded-folder-background",
+				$default: var(--background-secondary)
+			)} !important;
+		}
+
+		[class^="button-"][class*="colorPrimary-"] {
+			color: #{csc-get-color($s, "button-primary-text", $default: var(--text-primary))};
+		}
+
+		[class*="modeUnread-"] [class^="name-"] {
+			color: #{csc-get-color($s, "channels-unread", $default: var(--interactive-active))};
+		}
+
+		[class*="modeSelected-"] [class^="name-"] {
+			color: #{csc-get-color($s, "channels-selected", $default: var(--interactive-active))};
+		}
+
+		:is([class*="modeUnread-"], [class*="modeSelected"]):hover [class^="name-"] {
+			color: #{csc-get-color($s, "channels-hover", $default: var(--interactive-active))};
+		}
+
+		@if $message-logger-pill {
+			// support for remessagelogger
+			.messagelogger-deleted {
+				&::before {
+					background-color: #{csc-get-color($s, "message-deleted-pill", $default: color.adjust(csc-get-color($s, "message-deleted", $default: #f04747), $lightness: 10%))};
+					
+					content: "";
+					position: absolute;
+					display: block;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					pointer-events: none;
+					width: 2px;
+				}
+			}
+		}
+	}
+}
+
 // unmigrated features. please move into main file.
 // you can comment these out to exclude bits of the theme
-@include f_color.apply($colorset);
-@include f_declutter.apply($colorset);
-@include f_search.apply($colorset);
-@include f_sidebar.apply($colorset);
-@include f_profiles.apply($colorset);
-@include f_embed.apply($colorset);
-@include f_emoji.apply($colorset);
-@include f_blocked.apply($colorset);
-@include f_chat.apply($colorset);
-@include f_disconnect.apply($colorset);
+@include f_declutter.apply($colors-dark);
+@include f_search.apply($colors-dark);
+@include f_sidebar.apply($colors-dark);
+@include f_profiles.apply($colors-dark);
+@include f_embed.apply($colors-dark);
+@include f_emoji.apply($colors-dark);
+@include f_blocked.apply($colors-dark);
+@include f_chat.apply($colors-dark);
+@include f_disconnect.apply($colors-dark);	
+
