@@ -31,7 +31,6 @@ $include-light:       true !default;
 // add a pill to deleted messages like mentions and ephermals
 $message-logger-pill: true !default;
 
-@use 'features/color'      as f_color;
 @use 'features/declutter'  as f_declutter;
 @use 'features/search'     as f_search;
 @use 'features/sidebar'    as f_sidebar;
@@ -156,22 +155,23 @@ $message-logger-pill: true !default;
 		:is([class*="modeUnread-"], [class*="modeSelected"]):hover [class^="name-"] {
 			color: #{csc-get-color($s, "channels-hover", $default: var(--interactive-active))};
 		}
+	}
+}
 
-		@if $message-logger-pill {
-			// support for remessagelogger
-			.messagelogger-deleted {
-				&::before {
-					background-color: #{csc-get-color($s, "message-deleted-pill", $default: color.adjust(csc-get-color($s, "message-deleted", $default: #f04747), $lightness: 10%))};
-					
-					content: "";
-					position: absolute;
-					display: block;
-					top: 0;
-					left: 0;
-					bottom: 0;
-					pointer-events: none;
-					width: 2px;
-				}
+// remessagelogger pill
+@if $message-logger-pill {
+	@include colored using ($s) {
+		.messagelogger-deleted {
+			&::before {
+				background-color: #{csc-get-color($s, "message-deleted-pill", $default: color.adjust(csc-get-color($s, "message-deleted", $default: #f04747), $lightness: 10%))};					
+				content: "";
+				position: absolute;
+				display: block;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				pointer-events: none;
+				width: 2px;
 			}
 		}
 	}
