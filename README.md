@@ -6,6 +6,8 @@ A darker theme for discord with various QOL improvements. Designed to be as unop
 - Hide blocked messages
 - Revert the thicker new message bar
 - Timestamp on edited messages
+- Remove a lot of clutter that usually isnt used
+- Remove nitro upsells when possible
 - Unmigrated tweaks, unlisted
 
 ### ReMessageLogger Tweaks

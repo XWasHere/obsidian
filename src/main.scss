@@ -21,23 +21,46 @@ $font-display: [
 
 //- feature toggles -//
 // enable font overrides
-$override-fonts:        true !default;
+$override-fonts:            true !default;
 // enable color overrides
-$override-colors:       true !default;
+$override-colors:           true !default;
 // enable the theme in dark mode
-$include-dark:          true !default;
+$include-dark:              true !default;
 // enable the theme in light mode
-$include-light:         true !default;
+$include-light:             true !default;
 // add a pill to deleted messages like mentions and ephermals
-$message-logger-pill:   true !default;
+$message-logger-pill:       true !default;
+// gift from god
+$hide-nitro-upsells:        true !default;
 // hide blocked messages
-$hide-blocked-messages: true !default;
+$hide-blocked-messages:     true !default;
 // revert new messages bar to its original thickness
-$thin-new-messages-bar: true !default;
+$thin-new-messages-bar:     true !default;
 // edited timestamp
-$edited-timestamp:      true !default;
+$edited-timestamp:          true !default;
+// hide beta badge
+$hide-beta-badge:           true !default;
+// hide buttons in message box
+$hide-slash-command-button: true !default;
+$hide-thread-button:        true !default;
+$hide-nitro-button:         $hide-nitro-upsells !default;
+$hide-sticker-button:       true !default;
+// hide new feature popouts
+$hide-new-feature-popouts:  $hide-nitro-upsells !default;
+// hide dm tabs
+$hide-nitro-dm-tab:         $hide-nitro-upsells !default;
+$hide-snowsgiving-dm-tab:   true !default;
+// hide help button
+$hide-help-button:          true !default;
+// hide hello button
+$hide-hello-button:         true !default;
+// hide browse channels button
+$hide-browse-channels-button: true !default;
+// hide thread suggestion bar
+$hide-thread-suggestion-bar:true !default;
+// hide nickname list
+$hide-profile-aka-list:     true !default;
 
-@use 'features/declutter'  as f_declutter;
 @use 'features/search'     as f_search;
 @use 'features/sidebar'    as f_sidebar;
 @use 'features/profiles'   as f_profiles;
@@ -212,9 +235,83 @@ $edited-timestamp:      true !default;
 	}			
 }
 
+// remove the beta badge
+@if $hide-beta-badge {
+	[class^=textBadge-][class*=base-][class*=eyebrow-][class*=baseShapeRound-] {
+		display: none;
+	}
+}
+
+@if $hide-slash-command-button {
+	#channel-attach-SLASH_COMMAND { display: none; }
+}
+
+@if $hide-thread-button {
+	#channel-attach-THREAD { display: none; }
+}
+
+[class^=channelTextArea-] [class^=buttons-] {
+	@if $hide-nitro-button   { > :nth-child(1) { display: none; } }
+	@if $hide-sticker-button { > :nth-child(3) { display: none; } }
+}
+
+@if $hide-new-feature-popouts {
+	// for some reason unknown to man, discord randomizes the popout thing so i have to search for its id instead of its class
+	[id^=popout_] [class*=upsellTooltipWrapper-] {
+		display: none;
+	}
+}
+
+@if $hide-nitro-dm-tab {
+	[class^=privateChannels] [class^=content-] > li:nth-of-type(2) {
+		display: none;
+	}
+}
+
+
+@if $hide-snowsgiving-dm-tab {
+	[class*=snowsgivingLink-] {
+		display: none;
+	}
+}
+
+@if $hide-help-button {
+	[class^=toolbar-] a[href*=support] { display: none; }
+}
+
+@if $hide-hello-button {
+	[class^=welcomeCTA-], [class^=scrollerInner-] > [class^=containerCompact-] {
+		display: none;
+	}
+}
+
+@if $hide-browse-channels-button {
+	[aria-label=Channels] [class^=containerDefault-]:not([data-dnd-name]) {
+		display: none;
+
+		&+[class^=sectionDivider-] {
+			display: none;
+		}
+	}
+}
+
+@if $hide-thread-suggestion-bar {
+	[class^=threadSuggestionBar-] {
+		display: none;
+	}
+}
+
+@if $hide-nitro-upsells {
+	[class^=tryItOutSection-],
+	[class*=upsellOverlayContainer-]:has([class^=upsellOverlay-]) { display: none; }
+}
+
+@if $hide-profile-aka-list {
+	[class*=usernameSection-]>div>[class^=container-] { display: none; }
+}
+
 // unmigrated features. please move into main file.
 // you can comment these out to exclude bits of the theme
-@include f_declutter.apply($colors-dark);
 @include f_search.apply($colors-dark);
 @include f_sidebar.apply($colors-dark);
 @include f_profiles.apply($colors-dark);
