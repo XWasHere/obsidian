@@ -21,15 +21,17 @@ $font-display: [
 
 //- feature toggles -//
 // enable font overrides
-$override-fonts:      true !default;
+$override-fonts:        true !default;
 // enable color overrides
-$override-colors:     true !default;
+$override-colors:       true !default;
 // enable the theme in dark mode
-$include-dark:        true !default;
+$include-dark:          true !default;
 // enable the theme in light mode
-$include-light:       true !default;
+$include-light:         true !default;
 // add a pill to deleted messages like mentions and ephermals
-$message-logger-pill: true !default;
+$message-logger-pill:   true !default;
+// hide blocked messages
+$hide-blocked-messages: true !default;
 
 @use 'features/declutter'  as f_declutter;
 @use 'features/search'     as f_search;
@@ -37,7 +39,6 @@ $message-logger-pill: true !default;
 @use 'features/profiles'   as f_profiles;
 @use 'features/embed'      as f_embed;
 @use 'features/emoji'      as f_emoji;
-@use 'features/blocked'    as f_blocked;
 @use 'features/chat'       as f_chat;
 @use 'features/disconnect' as f_disconnect;
 
@@ -177,6 +178,13 @@ $message-logger-pill: true !default;
 	}
 }
 
+// hide blocked messages
+@if $hide-blocked-messages {
+	div[class^=groupStart-] {
+		display: none;
+	}
+}
+
 // unmigrated features. please move into main file.
 // you can comment these out to exclude bits of the theme
 @include f_declutter.apply($colors-dark);
@@ -185,7 +193,6 @@ $message-logger-pill: true !default;
 @include f_profiles.apply($colors-dark);
 @include f_embed.apply($colors-dark);
 @include f_emoji.apply($colors-dark);
-@include f_blocked.apply($colors-dark);
 @include f_chat.apply($colors-dark);
 @include f_disconnect.apply($colors-dark);	
 

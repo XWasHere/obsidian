@@ -3,6 +3,7 @@ A darker theme for discord with various QOL improvements. Designed to be as unop
 
 ## Tweaks
 - Revert new font
+- Hide blocked messages
 - Unmigrated tweaks, unlisted
 
 ### ReMessageLogger Tweaks
