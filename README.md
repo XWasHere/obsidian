@@ -8,6 +8,8 @@ A darker theme for discord with various QOL improvements. Designed to be as unop
 - Timestamp on edited messages
 - Remove a lot of clutter that usually isnt used
 - Remove nitro upsells when possible
+- Solid profile background
+- Fix discord not displaying a users full about me
 - Unmigrated tweaks, unlisted
 
 ### ReMessageLogger Tweaks

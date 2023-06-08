@@ -3,6 +3,7 @@
 @use "sass:color";
 
 @use "util/colorset" as *;
+@use "util/mdi";
 
 @use 'colorsets/obsidian' as c_obsidian;
 @use 'colorsets/novela'   as c_novela;
@@ -60,13 +61,18 @@ $hide-browse-channels-button: true !default;
 $hide-thread-suggestion-bar:true !default;
 // hide nickname list
 $hide-profile-aka-list:     true !default;
-
-@use 'features/search'     as f_search;
-@use 'features/sidebar'    as f_sidebar;
-@use 'features/profiles'   as f_profiles;
-@use 'features/embed'      as f_embed;
-@use 'features/emoji'      as f_emoji;
-@use 'features/disconnect' as f_disconnect;
+// star on right
+$star-on-right:             true !default;
+// solid profile background
+$solid-profile-background:  true !default;
+// name tag custom font hack
+$username-hack:             true !default;
+// remove ... in about me
+$full-about-me:             true !default;
+// less intrusive mentions
+$collapsible-mention-bar:   true !default;
+// collapsible search bar
+$collapsible-search-bar:    true !default;
 
 // wow
 @mixin colored {
@@ -310,12 +316,157 @@ $hide-profile-aka-list:     true !default;
 	[class*=usernameSection-]>div>[class^=container-] { display: none; }
 }
 
-// unmigrated features. please move into main file.
-// you can comment these out to exclude bits of the theme
-@include f_search.apply($colors-dark);
-@include f_sidebar.apply($colors-dark);
-@include f_profiles.apply($colors-dark);
-@include f_embed.apply($colors-dark);
-@include f_emoji.apply($colors-dark);
-@include f_disconnect.apply($colors-dark);	
+@if $star-on-right {
+	[class^=imageAccessory-] {
+		left: unset;
+		right: 6px;
 
+		// rest in peace black and white star
+		//   /^^^\  .
+		//   |   | <o>
+		// __|___|___\
+	}
+}
+
+[class^=userPopoutInner-], [class^=userProfileModalInner-] {
+	@if $solid-profile-background {
+		--profile-avatar-border-color: var(--profile-body-background-color);
+		background: var(--profile-body-background-color) !important;
+	}
+
+	@if $username-hack {
+		[class^=nameTag-] {
+			font-family: var(--font-primary);
+			font-weight: 500;
+		}
+	}
+
+	@if $full-about-me {
+		[class^=userInfoText-]>[class^=defaultColor-] {
+			-webkit-line-clamp: unset !important;
+		}
+	}
+}
+
+@if $collapsible-search-bar {
+    // collapsible search bar
+    [class^=search-]:not([class*=open-])>[class^=searchBar-] {
+        width:      24px;
+        background: transparent;
+
+        >[class^=icon-] {
+            // da hand
+            cursor: pointer;
+
+            // do some horrible stretching thing to make it look like a normal icon
+            svg {
+                width:  24px;
+                height: 24px;
+
+                margin-left: -3px;
+                margin-top:  -3px;
+
+                color: var(--interactive-normal);
+            }
+
+            // change color like a normal icon
+            &:hover svg {
+                color: var(--interactive-hover);
+            }
+        }
+    }
+}
+
+@if $mention-bullet {
+    [class^=sidebar-] {
+        [class*=unreadTop-], [class*=unreadBottom-] {
+            display:         flex;
+            justify-content: right;
+            padding-right:   0px;
+        }
+
+        [class*=unreadTop-] [class*=unreadBar-] {
+            background-image: url(mdi.$up-arrow-thin-w);
+        }
+        
+        [class*=unreadDown-] [class*=unreadBar-] {
+            background-image: url(mdi.$down-arrow-thin-w);
+        }
+
+        [class*=unreadBar-] {
+            // background space
+            background-size:     20px 20px;
+            background-repeat:   no-repeat;
+            background-position: 15px 0.0px;
+
+            padding: 0;
+            padding-right: 15px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+
+            span {
+                font-size: 0px;
+                position:  relative;
+                &::after {
+                    position:   absolute;
+                    top:        0px;
+                    left:       0px;
+
+                    font-size:  12px;
+                    content:    "!";
+                }
+            }
+        }
+
+        .container-24rGVp {
+            justify-content: right;
+
+            [class*=mentionsBar-] {
+                background-size:     20px 20px;
+                background-repeat:   no-repeat;
+                background-position: 15px 0.0px;
+            }
+
+            &[class*=top-] [class*=mentionsBar-] {
+                background-image: url(mdi.$up-arrow-thin-w);
+            }
+
+            &[class*=bottom-] [class*=mentionsBar-] {
+                background-image: url(mdi.$down-arrow-thin-w);
+            }
+
+            [class*=mentionsBar-] {
+                // makes the pill a bullet
+                padding: 0;
+                padding-right: 15px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+
+                >div {
+                    // makes it round
+                    padding:      0;
+                    text-align:   center;
+                    line-height:  20px;
+                    width:        20px;
+                    height:       20px;
+
+                    // gets the funny number
+                    --status-danger-text-real: var(--status-danger-text);
+                    --status-danger-text: #00000000;
+                    font-size: 0px;
+                    word-spacing: 1000px;
+                    &::first-line {
+                        color:        var(--white-500);
+                        word-spacing: 0px;
+                        font-size:    12px;
+                        font-weight:  700;
+                    }
+                }
+            }
+        }
+    }
+}
