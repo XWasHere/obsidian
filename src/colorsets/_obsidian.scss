@@ -3,9 +3,6 @@
 
 $version: 1;
 $config: (
-	font-primary: font("aven", $name: "Whitney",          $styles: normal italic, $widths: 300 400 500 600 700, $class: sans-serif, $important: true),
-	font-display: font("aven", $name: "ABC Ginto Normal", $styles: normal italic, $widths:     400 500     700, $class: sans-serif, $important: true),
-
 	primary: color($variants: (
 		500: #1f1f1f,
 		530: #1b1b1b,

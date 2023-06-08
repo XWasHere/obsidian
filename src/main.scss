@@ -1,11 +1,23 @@
+@use "sass:map";
 @use 'colorsets/obsidian' as c_obsidian;
 @use 'colorsets/novela'   as c_novela;
 
-$colors_light: c_novela.$config   !default;
-$colors_dark:  c_obsidian.$config !default;
+// colorsets to use for light mode and dark mode
+$colors-light: c_novela.$config   !default;
+$colors-dark:  c_obsidian.$config !default;
+
+// fonts
+$font-primary: [
+	(source: "aven", name: "Whitney", styles: normal italic, widths: 300 400 500 600 700, class: sans-serif, important: true)
+] !default;
+$font-display: [
+	(source: "aven", name: "ABC Ginto Normal", styles: normal italic, widths: 400 500 700, class: sans-serif, important: true)
+] !default;
+
+// feature toggles
+$override-fonts: true !default;
 
 @use 'features/color'      as f_color;
-@use 'features/font'       as f_font;
 @use 'features/declutter'  as f_declutter;
 @use 'features/search'     as f_search;
 @use 'features/sidebar'    as f_sidebar;
@@ -16,11 +28,37 @@ $colors_dark:  c_obsidian.$config !default;
 @use 'features/chat'       as f_chat;
 @use 'features/disconnect' as f_disconnect;
 
-$colorset: $colors_dark;
+$colorset: $colors-dark;
 
+// replace fonts
+@if $override-fonts {
+	@each $target, $fonts in (font-primary: $font-primary, font-display: $font-display){
+		@each $font in $fonts {
+			@if map.get($font, "source") == "aven" {
+				@each $style in map.get($font, "styles") {
+					@each $width in map.get($font, "widths") {
+						@font-face {
+							font-family: map.get($font, "name");
+							font-style:  $style;
+							font-weight: $width;
+							src: url("https://toxicaven.dev/assets/#{map.get($font, "name")}-#{$width}-#{$style}.woff2") format("woff2");
+						}
+					}
+				}
+
+				:root {
+					--#{$target}: "#{map.get($font, "name")}", "#{map.get($font, "class")}" #{if(map.get($font, "important"), !important, "")};
+				}
+			} @else {
+				@error "invalid font source \"#{map.get($font,"source")}\"";
+			}
+		}
+	}
+}
+
+// unmigrated features. please move into main file.
 // you can comment these out to exclude bits of the theme
 @include f_color.apply($colorset);
-@include f_font.apply($colorset);
 @include f_declutter.apply($colorset);
 @include f_search.apply($colorset);
 @include f_sidebar.apply($colorset);

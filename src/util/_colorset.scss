@@ -1,22 +1,6 @@
 @use "sass:map";
 @use "sass:meta";
 
-@function font($source, $name: null, $styles: null, $widths: null, $class: null, $important: false) {
-    @if not ($source == "aven") {
-        @error "unknown font source \"#{$source}\"";
-    }
-
-    @return (
-        type:      "font",
-        source:    $source,
-        name:      $name,
-        styles:    $styles,
-        widths:    $widths,
-        class:     $class,
-        important: $important
-    );
-}
-
 @function color($color: null, $variants: null) {
     @return (
         type:     "color",
@@ -53,24 +37,4 @@
 
 @function csc-has-variants($colorset, $name) {
     @return map.get(map.get($colorset, $name), "variants") != null;
-}
-
-@function csf-get-name($colorset, $name) {
-    @return map.get(map.get($colorset, $name), "name");
-}
-
-@function csf-get-class($colorset, $name) {
-    @return map.get(map.get($colorset, $name), "class");
-}
-
-@function csf-get-important($colorset, $name) {
-    @return map.get(map.get($colorset, $name), "important");
-}
-
-@function csf-get-styles($colorset, $name) {
-    @return map.get(map.get($colorset, $name), "styles");
-}
-
-@function csf-get-widths($colorset, $name) {
-    @return map.get(map.get($colorset, $name), "widths");
 }
