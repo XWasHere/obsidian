@@ -10,7 +10,8 @@ A darker theme for discord with various QOL improvements. Designed to be as unop
 - Remove nitro upsells when possible
 - Solid profile background
 - Fix discord not displaying a users full about me
-- Unmigrated tweaks, unlisted
+- Less intrusive mentions in the channel list
+- Collapsible search bar
 
 ### ReMessageLogger Tweaks
 - Add a line to the left of deleted messages similar to mentions and ephermals
