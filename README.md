@@ -1,9 +1,11 @@
 # Obsidian
-A darker theme for discord with various QOL improvements. Designed to be as unopinionated as possible, providing configuration for everything from what tweaks you want to improve to individual colors.
+A darker theme for discord with various QOL improvements. Designed to be as unopinionated as possible by providing configuration for everything from what tweaks you want to individual colors.
 
 ## Tweaks
 - Revert new font
 - Hide blocked messages
+- Revert the thicker new message bar
+- Timestamp on edited messages
 - Unmigrated tweaks, unlisted
 
 ### ReMessageLogger Tweaks

@@ -32,6 +32,10 @@ $include-light:         true !default;
 $message-logger-pill:   true !default;
 // hide blocked messages
 $hide-blocked-messages: true !default;
+// revert new messages bar to its original thickness
+$thin-new-messages-bar: true !default;
+// edited timestamp
+$edited-timestamp:      true !default;
 
 @use 'features/declutter'  as f_declutter;
 @use 'features/search'     as f_search;
@@ -39,7 +43,6 @@ $hide-blocked-messages: true !default;
 @use 'features/profiles'   as f_profiles;
 @use 'features/embed'      as f_embed;
 @use 'features/emoji'      as f_emoji;
-@use 'features/chat'       as f_chat;
 @use 'features/disconnect' as f_disconnect;
 
 // wow
@@ -185,6 +188,30 @@ $hide-blocked-messages: true !default;
 	}
 }
 
+// thin new messages bar
+@if $thin-new-messages-bar {
+	[class^=newMessagesBar-] {
+		height: 24px;
+	}
+}
+
+// timestamp on edited messages
+@if $edited-timestamp {
+	[class^=markup-] {
+		[class^=timestamp-]>time {
+			span { display: none; }
+
+			&:after {
+				font-size: 0.625rem;
+				font-weight: 400;
+				line-height: 1;
+				user-select: none;
+				content: "(" attr(aria-label) ")";
+			}
+		}
+	}			
+}
+
 // unmigrated features. please move into main file.
 // you can comment these out to exclude bits of the theme
 @include f_declutter.apply($colors-dark);
@@ -193,6 +220,5 @@ $hide-blocked-messages: true !default;
 @include f_profiles.apply($colors-dark);
 @include f_embed.apply($colors-dark);
 @include f_emoji.apply($colors-dark);
-@include f_chat.apply($colors-dark);
 @include f_disconnect.apply($colors-dark);	
 
