@@ -1,23 +1,22 @@
-$colorset: "obsidian" !default;
-
-@use 'features/color'     as f_color;
-@use 'features/font'      as f_font;
-@use 'features/declutter' as f_declutter;
-@use 'features/search'    as f_search;
-@use 'features/sidebar'   as f_sidebar;
-@use 'features/profiles'  as f_profiles;
-@use 'features/embed'     as f_embed;
-@use 'features/emoji'     as f_emoji;
-@use 'features/blocked'   as f_blocked;
-@use 'features/chat'      as f_chat;
-@use 'features/disconnect'as f_disconnect;
-
-// if you add something to /colorsets add it here too
 @use 'colorsets/obsidian' as c_obsidian;
 @use 'colorsets/novela'   as c_novela;
-@if      $colorset == "obsidian" { $colorset: c_obsidian.$colorset; }
-@else if $colorset == "novela"   { $colorset: c_novela.$colorset;   }
-@else                            { @error "unknown colorset \"#{$colorset}\""; }
+
+$colors_light: c_novela.$config   !default;
+$colors_dark:  c_obsidian.$config !default;
+
+@use 'features/color'      as f_color;
+@use 'features/font'       as f_font;
+@use 'features/declutter'  as f_declutter;
+@use 'features/search'     as f_search;
+@use 'features/sidebar'    as f_sidebar;
+@use 'features/profiles'   as f_profiles;
+@use 'features/embed'      as f_embed;
+@use 'features/emoji'      as f_emoji;
+@use 'features/blocked'    as f_blocked;
+@use 'features/chat'       as f_chat;
+@use 'features/disconnect' as f_disconnect;
+
+$colorset: $colors_dark;
 
 // you can comment these out to exclude bits of the theme
 @include f_color.apply($colorset);

@@ -19,4 +19,70 @@
     [class^=overlayBackground-] {
         margin: 21px 0px 0px;
     }
+
+   /* // profile v2
+	[class^=root-] {
+			overflow: visible;
+
+			>[class^=userProfileModalOuter-] {
+					overflow: visible;
+
+					>[class^=userProfileModalInner-] {
+							overflow: visible;
+
+							>[class^=userProfileModalOverlayBackground-] {
+									overflow: visible;
+
+									>[class^=body-] {
+											overflow: visible;
+
+											>[class^=infoScroller-] {
+													overflow: visible !important;
+
+													>[class^=connectedAccounts-] {
+														display: none;
+													}
+
+													>[class^=userInfoSection-] {
+															>[class^=memberSinceContainer-] + h1 {
+																position: absolute;
+																top:      -305px;
+																left:     -310px;
+
+																padding-top: 10px;
+																padding-left: 8px;
+
+																width:  280px;
+																height: 575px;
+
+																background-color: var(--profile-body-background-color);
+
+																border-radius: 4px 4px 0 0;
+															}
+
+															>[class^=note-] {
+																position: absolute;
+																top:      -275px;
+																left:     -306px;
+
+																margin: 0px;
+
+																width: 280px;
+																height: 545px;
+																max-height: unset;
+
+																background-color: var(--profile-body-background-color);
+
+																>textarea {
+																		height: 545px !important;
+																		max-height: unset;
+																}
+															}
+													}
+											}
+									}
+							}
+					}
+			}
+	}*/
 }

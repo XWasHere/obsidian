@@ -1,8 +1,7 @@
 @use "sass:color" as s_color;
 @use "../util/colorset" as *;
 
-$version: 1;
-$colorset: (
+$config: (
 	font-primary: font("aven", $name: "Whitney",          $styles: normal italic, $widths: 300 400 500 600 700, $class: sans-serif, $important: true),
 	font-display: font("aven", $name: "ABC Ginto Normal", $styles: normal italic, $widths:     400 500     700, $class: sans-serif, $important: true),
 
