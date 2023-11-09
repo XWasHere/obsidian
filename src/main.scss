@@ -149,11 +149,11 @@ $collapsible-search-bar:    true !default;
 			}
 		}
 
-		[class*="mentioned-"]::before {
+		[class*="mentioned__"]::before {
 			background-color: #{csc-get-color($s, "pill-mentioned")};
 		}
 
-		[class*="reaction-"] {
+		[class*="reaction__"] {
 			background-color: #{csc-get-color(
 				$s,
 				"reaction-background",
@@ -161,11 +161,11 @@ $collapsible-search-bar:    true !default;
 			)};
 		}
 
-		[class^="mainContent-"]:not([href]) > [aria-label^="Text"] + [class^="name-"] {
+		[class^="mainContent__"]:not([href]) > [aria-label^="Text"] + [class^="name-"] {
 			text-decoration: line-through;
 		}
 
-		[class^="expandedFolderBackground-"] {
+		[class^="expandedFolderBackground__"] {
 			background-color: #{csc-get-color(
 				$s,
 				"expanded-folder-background",
@@ -173,19 +173,19 @@ $collapsible-search-bar:    true !default;
 			)} !important;
 		}
 
-		[class^="button-"][class*="colorPrimary-"] {
+		[class^="button__"][class*="colorPrimary__"] {
 			color: #{csc-get-color($s, "button-primary-text", $default: var(--text-primary))};
 		}
 
-		[class*="modeUnread-"] [class^="name-"] {
+		[class*="modeUnread__"] [class^="name__"] {
 			color: #{csc-get-color($s, "channels-unread", $default: var(--interactive-active))};
 		}
 
-		[class*="modeSelected-"] [class^="name-"] {
+		[class*="modeSelected__"] [class^="name__"] {
 			color: #{csc-get-color($s, "channels-selected", $default: var(--interactive-active))};
 		}
 
-		:is([class*="modeUnread-"], [class*="modeSelected"]):hover [class^="name-"] {
+		:is([class*="modeUnread__"], [class*="modeSelected"]):hover [class^="name__"] {
 			color: #{csc-get-color($s, "channels-hover", $default: var(--interactive-active))};
 		}
 	}
@@ -212,22 +212,22 @@ $collapsible-search-bar:    true !default;
 
 // hide blocked messages
 @if $hide-blocked-messages {
-	div[class^=groupStart-] {
+	div[class^=groupStart__] {
 		display: none;
 	}
 }
 
 // thin new messages bar
 @if $thin-new-messages-bar {
-	[class^=newMessagesBar-] {
+	[class^=newMessagesBar__] {
 		height: 24px;
 	}
 }
 
 // timestamp on edited messages
 @if $edited-timestamp {
-	[class^=markup-] {
-		[class^=timestamp-]>time {
+	[class^=markup__] {
+		[class^=timestamp__]>time {
 			span { display: none; }
 
 			&:after {
@@ -243,7 +243,7 @@ $collapsible-search-bar:    true !default;
 
 // remove the beta badge
 @if $hide-beta-badge {
-	[class^=textBadge-][class*=base-][class*=eyebrow-][class*=baseShapeRound-] {
+	[class^=textBadge__][class*=base__][class*=eyebrow__][class*=baseShapeRound__] {
 		display: none;
 	}
 }
@@ -256,68 +256,68 @@ $collapsible-search-bar:    true !default;
 	#channel-attach-THREAD { display: none; }
 }
 
-[class^=channelTextArea-] [class^=buttons-] {
+[class^=channelTextArea__] [class^=buttons__] {
 	@if $hide-nitro-button   { > :nth-child(1) { display: none; } }
 	@if $hide-sticker-button { > :nth-child(3) { display: none; } }
 }
 
 @if $hide-new-feature-popouts {
 	// for some reason unknown to man, discord randomizes the popout thing so i have to search for its id instead of its class
-	[id^=popout_] [class*=upsellTooltipWrapper-] {
+	[id^=popout_] [class*=upsellTooltipWrapper__] {
 		display: none;
 	}
 }
 
 @if $hide-nitro-dm-tab {
-	[class^=privateChannels] [class^=content-] > li:nth-of-type(2) {
+	[class^=privateChannels] [class^=content__] > li:nth-of-type(2) {
 		display: none;
 	}
 }
 
 
 @if $hide-snowsgiving-dm-tab {
-	[class*=snowsgivingLink-] {
+	[class*=snowsgivingLink__] {
 		display: none;
 	}
 }
 
 @if $hide-help-button {
-	[class^=toolbar-] a[href*=support] { display: none; }
+	[class^=toolbar__] a[href*=support] { display: none; }
 }
 
 @if $hide-hello-button {
-	[class^=welcomeCTA-], [class^=scrollerInner-] > [class^=containerCompact-] {
+	[class^=welcomeCTA__], [class^=scrollerInner__] > [class^=containerCompact__] {
 		display: none;
 	}
 }
 
 @if $hide-browse-channels-button {
-	[aria-label=Channels] [class^=containerDefault-]:not([data-dnd-name]) {
+	[aria-label=Channels] [class^=containerDefault__]:not([data-dnd-name]) {
 		display: none;
 
-		&+[class^=sectionDivider-] {
+		&+[class^=sectionDivider__] {
 			display: none;
 		}
 	}
 }
 
 @if $hide-thread-suggestion-bar {
-	[class^=threadSuggestionBar-] {
+	[class^=threadSuggestionBar__] {
 		display: none;
 	}
 }
 
 @if $hide-nitro-upsells {
-	[class^=tryItOutSection-],
-	[class*=upsellOverlayContainer-]:has([class^=upsellOverlay-]) { display: none; }
+	[class^=tryItOutSection__],
+	[class*=upsellOverlayContainer__]:has([class^=upsellOverlay__]) { display: none; }
 }
 
 @if $hide-profile-aka-list {
-	[class*=usernameSection-]>div>[class^=container-] { display: none; }
+	[class*=usernameSection__]>div>[class^=container__] { display: none; }
 }
 
 @if $star-on-right {
-	[class^=imageAccessory-] {
+	[class^=imageAccessory__] {
 		left: unset;
 		right: 6px;
 
@@ -328,21 +328,21 @@ $collapsible-search-bar:    true !default;
 	}
 }
 
-[class^=userPopoutInner-], [class^=userProfileModalInner-] {
+[class^=userPopoutInner__], [class^=userProfileModalInner__] {
 	@if $solid-profile-background {
 		--profile-avatar-border-color: var(--profile-body-background-color);
 		background: var(--profile-body-background-color) !important;
 	}
 
 	@if $username-hack {
-		[class^=nameTag-] {
+		[class^=nameTag__] {
 			font-family: var(--font-primary);
 			font-weight: 500;
 		}
 	}
 
 	@if $full-about-me {
-		[class^=userInfoText-]>[class^=defaultColor-] {
+		[class^=userInfoText__]>[class^=defaultColor__] {
 			-webkit-line-clamp: unset !important;
 		}
 	}
@@ -350,11 +350,11 @@ $collapsible-search-bar:    true !default;
 
 @if $collapsible-search-bar {
     // collapsible search bar
-    [class^=search-]:not([class*=open-])>[class^=searchBar-] {
+    [class^=search__]:not([class*=open__])>[class^=searchBar__] {
         width:      24px;
         background: transparent;
 
-        >[class^=icon-] {
+        >[class^=icon__] {
             // da hand
             cursor: pointer;
 
@@ -378,22 +378,22 @@ $collapsible-search-bar:    true !default;
 }
 
 @if $mention-bullet {
-    [class^=sidebar-] {
-        [class*=unreadTop-], [class*=unreadBottom-] {
+    [class^=sidebar__] {
+        [class*=unreadTop__], [class*=unreadBottom__] {
             display:         flex;
             justify-content: right;
             padding-right:   0px;
         }
 
-        [class*=unreadTop-] [class*=unreadBar-] {
+        [class*=unreadTop__] [class*=unreadBar__] {
             background-image: url(mdi.$up-arrow-thin-w);
         }
         
-        [class*=unreadDown-] [class*=unreadBar-] {
+        [class*=unreadDown__] [class*=unreadBar__] {
             background-image: url(mdi.$down-arrow-thin-w);
         }
 
-        [class*=unreadBar-] {
+        [class*=unreadBar__] {
             // background space
             background-size:     20px 20px;
             background-repeat:   no-repeat;
@@ -425,21 +425,21 @@ $collapsible-search-bar:    true !default;
         .container-24rGVp {
             justify-content: right;
 
-            [class*=mentionsBar-] {
+            [class*=mentionsBar__] {
                 background-size:     20px 20px;
                 background-repeat:   no-repeat;
                 background-position: 15px 0.0px;
             }
 
-            &[class*=top-] [class*=mentionsBar-] {
+            &[class*=top__] [class*=mentionsBar__] {
                 background-image: url(mdi.$up-arrow-thin-w);
             }
 
-            &[class*=bottom-] [class*=mentionsBar-] {
+            &[class*=bottom__] [class*=mentionsBar__] {
                 background-image: url(mdi.$down-arrow-thin-w);
             }
 
-            [class*=mentionsBar-] {
+            [class*=mentionsBar__] {
                 // makes the pill a bullet
                 padding: 0;
                 padding-right: 15px;
