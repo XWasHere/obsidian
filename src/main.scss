@@ -256,7 +256,7 @@ $collapsible-search-bar:    true !default;
 	#channel-attach-THREAD { display: none; }
 }
 
-[class^=channelTextArea__] [class^=buttons__] {
+[class^=channelTextArea__] [class^=buttons_] {
 	@if $hide-nitro-button   { > :nth-child(1) { display: none; } }
 	@if $hide-sticker-button { > :nth-child(3) { display: none; } }
 }
@@ -378,7 +378,7 @@ $collapsible-search-bar:    true !default;
 }
 
 @if $mention-bullet {
-    [class^=sidebar__] {
+    [class^=sidebar_] {
         [class*=unreadTop__], [class*=unreadBottom__] {
             display:         flex;
             justify-content: right;
@@ -422,7 +422,7 @@ $collapsible-search-bar:    true !default;
             }
         }
 
-        .container-24rGVp {
+        [class^=positionedContainer_]>[class^=container__] {
             justify-content: right;
 
             [class*=mentionsBar__] {
